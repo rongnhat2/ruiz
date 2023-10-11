@@ -63,9 +63,9 @@
                             <div class="cart-page-total">
                                 <h2>Cart totals</h2>
                                 <ul>
-                                    <li>Total <span>$170.00</span></li>
+                                    <li>Total <span class="cart-total-price"></span></li>
                                 </ul>
-                                <a href="#" class="proceed-checkout-btn">Proceed to checkout</a>
+                                <a href="/checkout" class="proceed-checkout-btn">Proceed to checkout</a>
                             </div>
                         </div>
                     </div>

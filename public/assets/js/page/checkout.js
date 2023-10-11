@@ -5,17 +5,14 @@ const View = {
             View.Cart.total += data.quantity * data.prices
             $(".cart-total-price").html(`$${View.Cart.total}`)
             $(".cart-list")
-                .append(`<tr>
-                            <td class="plantmore-product-thumbnail">
-                                <a href="/product/${data.slug}"> <img src="/${data.images.split(",")[0]}" style="width: 150px" alt=""></a>
+                .append(`
+                        <tr class="cart_item">
+                            <td class="product-name">
+                                ${data.name} <strong class="product-quantity"> × ${data.quantity}</strong>
                             </td>
-                            <td class="plantmore-product-name"><a href="#">${data.name}</a></td>
-                            <td class="plantmore-product-price"><span class="amount">$${data.prices}</span></td>
-                            <td class="plantmore-product-quantity" data-id="${data.id}">
-                                <input value="${data.quantity}" type="number">
+                            <td class="product-total">
+                                <span class="amount">$${data.quantity * data.prices}</span>
                             </td>
-                            <td class="product-subtotal"><span class="amount">$${data.quantity * data.prices}</span></td>
-                            <td class="plantmore-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
                         </tr>`)
         },
         doUpdate(){

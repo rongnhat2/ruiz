@@ -37,4 +37,7 @@ class DisplayController extends Controller
     public function cart(){
         return view('customer.cart');
     }
+    public function checkout(){
+        return view('customer.checkout');
+    }
 }

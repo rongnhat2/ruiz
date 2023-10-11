@@ -15,7 +15,7 @@ const View = {
                                 <input value="${data.quantity}" type="number">
                             </td>
                             <td class="product-subtotal"><span class="amount">$${data.quantity * data.prices}</span></td>
-                            <td class="plantmore-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
+                            <td class="plantmore-product-remove" data-id="${data.id}"><a href="#"><i class="fa fa-times"></i></a></td>
                         </tr>`)
         },
         doUpdate(){
@@ -24,6 +24,12 @@ const View = {
         onUpdate(callback){ 
             $(document).on('click', `.update-cart`, function() {
                 callback();
+            }); 
+        },
+        onRemove(callback){ 
+            $(document).on('click', `.plantmore-product-remove`, function() {
+                let data_id = $(this).attr("data-id")
+                callback(data_id);
             }); 
         },
     },
@@ -81,6 +87,22 @@ const View = {
             getOne(v)
         }) 
     }
+
+    View.Cart.onRemove((id) => {
+        var card_data = localStorage.getItem("ruiz-cart")
+        let card_json = JSON.parse(card_data)
+
+        let card_new = []
+        card_json.map(v => {
+            let cart_item = JSON.parse(v)
+            if (cart_item.id != id) card_new.push(JSON.stringify(cart_item)) 
+        })
+
+        localStorage.setItem("ruiz-cart", JSON.stringify(card_new)); 
+
+        card_json_new = JSON.parse(JSON.stringify(card_new))
+        renderData(card_json_new)
+    })
  
     function getColor(){
         Api.Color.GetAll()

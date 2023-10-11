@@ -48,41 +48,42 @@
                         <div class="col-lg-6 col-md-6">
                             <!-- billing-details-wrap start -->
                             <div class="billing-details-wrap">
-                                <form action="#">
+                                <div class="cart-form-data js-validate">
                                     <h3 class="shoping-checkboxt-title">Billing Details</h3>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <p class="single-form-row">
                                                 <label>Username <span class="required">*</span></label>
-                                                <input type="text" name="First name">
+                                                <input type="text" name="First name" class="data-name">
                                             </p>
                                         </div>
                                         <div class="col-lg-6">
                                             <p class="single-form-row">
                                                 <label>Email <span class="required">*</span></label>
-                                                <input type="text" name="Last name">
+                                                <input type="text" name="Last name" class="data-email">
                                             </p>
                                         </div> 
                                         <div class="col-lg-12">
                                             <p class="single-form-row">
                                                 <label>Town / City <span class="required">*</span></label>
-                                                <input type="text" name="address">
+                                                <input type="text" name="address" class="data-address">
                                             </p>
                                         </div>
                                         <div class="col-lg-12">
                                             <p class="single-form-row">
                                                 <label>Phone <span class="required">*</span></label>
-                                                <input type="text" name="address">
+                                                <input type="text" name="phone" class="data-phone">
                                             </p>
                                         </div>
                                         <div class="col-lg-12">
                                             <p class="single-form-row m-0">
                                                 <label>Order notes</label>
-                                                <textarea placeholder="Notes about your order, e.g. special notes for delivery." class="checkout-mess" rows="2" cols="5"></textarea>
+                                                <textarea placeholder="Notes about your order, e.g. special notes for delivery." class="checkout-mess data-description" rows="2" cols="5"></textarea>
                                             </p>
                                         </div>
+                                        <div class="error-log mt-3"></div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                             <!-- billing-details-wrap end -->
                         </div>
@@ -153,7 +154,7 @@
                                             <!-- ACCORDION END -->
                                         </div>
                                         <div class="order-button-payment">
-                                            <input type="submit" value="Place order" />
+                                            <input type="button" value="Place order" class="button-payment" />
                                         </div>
                                     </div>
                                     <!-- your-order-wrapper start -->

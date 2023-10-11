@@ -21,6 +21,50 @@ Route::get('cart', 'Customer\DisplayController@cart')->name('customer.view.cart'
 Route::get('checkout', 'Customer\DisplayController@checkout')->name('customer.view.checkout'); 
 
 
+Route::prefix('customer')->group(function () {
+    Route::prefix('apip')->group(function () {
+        Route::prefix('auth')->group(function () {
+            Route::post('register', 'Customer\AuthController@register')->name('customer.auth.register');
+            Route::post('login', 'Customer\AuthController@login')->name('customer.auth.login');
+            Route::post('forgot', 'Customer\AuthController@forgot')->name('customer.auth.forgot');
+            Route::post('reset', 'Customer\AuthController@reset')->name('customer.auth.reset');
+            Route::post('code', 'Customer\AuthController@code')->name('customer.auth.code');
+            Route::post('change', 'Customer\AuthController@change')->name('customer.auth.change');
+            Route::post('update', 'Customer\AuthController@update')->name('customer.auth.update');
+            Route::get('get-profile', 'Customer\AuthController@get_profile')->name('customer.auth.profile');
+        }); 
+
+
+        Route::prefix('category')->group(function () {
+            Route::get('get', 'Customer\CategoryController@get')->name('customer.category.get');
+        }); 
+        Route::prefix('product')->group(function () {
+            Route::get('get-all', 'Customer\ProductController@get_all')->name('customer.product.get.all');
+            Route::get('get-trending', 'Customer\ProductController@get_trending')->name('customer.product.get.trending');
+            Route::get('get-new-arrivals', 'Customer\ProductController@get_new_arrivals')->name('customer.product.get.new_arrivals');
+            Route::get('get-top-view', 'Customer\ProductController@get_top_view')->name('customer.product.get.top_view');
+
+
+            Route::get('get-discount', 'Customer\ProductController@get_discount')->name('customer.product.get.discount');
+            Route::get('get-item-category/{id}', 'Customer\ProductController@get_item_category')->name('customer.product.get.item_category');
+
+            Route::post('get-search', 'Customer\ProductController@get_search')->name('customer.product.get.search');
+            Route::get('get-one/{id}', 'Customer\ProductController@get_one')->name('customer.product.get.one');
+            Route::get('get-one-cart/{id}', 'Customer\ProductController@get_one_cart')->name('customer.product.get.cart');
+            Route::get('get-recently/{item}', 'Customer\ProductController@get_recently')->name('customer.product.get.recently');
+            Route::get('get-related/{id}', 'Customer\ProductController@get_related')->name('customer.product.get.related');
+        });
+        Route::prefix('cart')->group(function () {
+            Route::get('get-cart', 'Customer\CartController@get')->name('customer.cart.get');
+            Route::post('update', 'Customer\CartController@update')->name('customer.cart.update');
+        }); 
+        Route::prefix('order')->group(function () {
+            Route::post('checkout', 'Customer\OrderController@checkout')->name('customer.order.checkout');
+            Route::get('get', 'Customer\OrderController@get')->name('customer.order.get');
+        });  
+    });
+});
+
 
 
 Route::prefix('admin')->group(function () {
@@ -36,6 +80,10 @@ Route::prefix('admin')->group(function () {
     });
     Route::prefix('product')->group(function () {
         Route::get('/', 'Admin\ProductController@index')->name('admin.product.index'); 
+    });
+    
+    Route::prefix('order')->group(function () {
+        Route::get('/', 'Admin\OrderController@index')->name('admin.order.index');
     });
 
 
@@ -54,9 +102,6 @@ Route::prefix('admin')->group(function () {
     });
     Route::prefix('watermark')->group(function () {
         Route::get('/', 'Admin\DisplayController@watermark')->name('admin.watermark.index');
-    });
-    Route::prefix('order')->group(function () {
-        Route::get('/', 'Admin\OrderController@index')->name('admin.order.index');
     });
     Route::prefix('manager')->group(function () {
         Route::get('/', 'Admin\ManagerController@index')->name('admin.manager.index');

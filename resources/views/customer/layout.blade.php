@@ -101,7 +101,7 @@
                         <div class="col-lg-3">
                             <div class="right-blok-box text-white d-flex">
                                 <div class="shopping-cart-wrap cart-count">
-                                    <a href="cart"><i class="icon-basket-loaded"></i><span class="cart-total count"></span></a> 
+                                    <a href="/cart"><i class="icon-basket-loaded"></i><span class="cart-total count"></span></a> 
                                 </div>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                             <div class="right-blok-box text-white d-flex">
 
                                 <div class="shopping-cart-wrap cart-count">
-                                    <a href="cart"><i class="icon-basket-loaded"></i><span class="cart-total count"></span></a>
+                                    <a href="/cart"><i class="icon-basket-loaded"></i><span class="cart-total count"></span></a>
                                 </div>
 
                                 <div class="mobile-menu-btn d-block d-lg-none">

@@ -45,37 +45,8 @@
                                     <th class="plantmore-product-remove">Remove</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="plantmore-product-thumbnail"><a href="#"><img src="assets/images/other/01.jpg" alt=""></a></td>
-                                    <td class="plantmore-product-name"><a href="#">Compete Track Tote</a></td>
-                                    <td class="plantmore-product-price"><span class="amount">$70.00</span></td>
-                                    <td class="plantmore-product-quantity">
-                                        <input value="1" type="number">
-                                    </td>
-                                    <td class="product-subtotal"><span class="amount">$70.00</span></td>
-                                    <td class="plantmore-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="plantmore-product-thumbnail"><a href="#"><img src="assets/images/other/02.jpg" alt=""></a></td>
-                                    <td class="plantmore-product-name"><a href="#">Vestibulum suscipit</a></td>
-                                    <td class="plantmore-product-price"><span class="amount">$60.50</span></td>
-                                    <td class="plantmore-product-quantity">
-                                        <input value="1" type="number">
-                                    </td>
-                                    <td class="product-subtotal"><span class="amount">$60.50</span></td>
-                                    <td class="plantmore-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="plantmore-product-thumbnail"><a href="#"><img src="assets/images/other/03.jpg" alt=""></a></td>
-                                    <td class="plantmore-product-name"><a href="#">suscip dictum magna</a></td>
-                                    <td class="plantmore-product-price"><span class="amount">$40.50</span></td>
-                                    <td class="plantmore-product-quantity">
-                                        <input value="1" type="number">
-                                    </td>
-                                    <td class="product-subtotal"><span class="amount">$40.50</span></td>
-                                    <td class="plantmore-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                </tr>
+                            <tbody class="cart-list">
+                                 
                             </tbody>
                         </table>
                     </div>
@@ -83,7 +54,7 @@
                         <div class="col-md-8">
                             <div class="coupon-all">
                                 <div class="coupon2">
-                                    <input class="submit" name="update_cart" value="Update cart" type="submit">
+                                    <a href="#" class="update-cart continue-btn">Update cart</a>
                                     <a href="category" class=" continue-btn">Continue Shopping</a>
                                 </div>
                             </div>

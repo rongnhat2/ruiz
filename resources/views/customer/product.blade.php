@@ -51,11 +51,11 @@
                         <!--// Product Details Left -->
                     </div>
 
-                    <div class="col-lg-7 col-md-6">
+                    <div class="col-lg-7 col-md-6 product-data">
                         <div class="product-details-view-content">
                             <div class="product-info">
                                 <h3>{{ $data_response["data"]->name }}</h3>
-                                <div class="product-rating d-flex">
+                                {{-- <div class="product-rating d-flex">
                                     <ul class="d-flex">
                                         <li><a href="#"><i class="icon-star"></i></a></li>
                                         <li><a href="#"><i class="icon-star"></i></a></li>
@@ -64,26 +64,46 @@
                                         <li><a href="#"><i class="icon-star"></i></a></li>
                                     </ul>
                                     <a href="#reviews">(<span class="count">0</span> customer review)</a>
-                                </div>
+                                </div> --}}
                                 <div class="price-box">
-                                    <span class="new-price">$70.00</span>
-                                    <span class="old-price">$78.00</span>
+                                    <span class="new-price">${{ $data_response["data"]->prices }}</span>
+                                    {{-- <span class="old-price">$78.00</span> --}}
                                 </div>
                                 <p>{{ $data_response["data"]->description }}</p>
 
-                                <div class="single-add-to-cart">
-                                    <form action="#" class="cart-quantity d-flex">
-                                        <div class="quantity">
-                                            <div class="cart-plus-minus">
-                                                <input type="number" class="input-text" name="quantity" value="1" title="Qty">
-                                            </div>
-                                        </div>
-                                        <button class="add-to-cart" type="submit">Add To Cart</button>
-                                    </form>
-                                </div> 
-                                <ul class="stock-cont mt-3"> 
+                                <ul class="stock-cont my-3"> 
+                                    <li class="product-stock-status">Sex: <a href="#">{{ $data_response["data"]->sex == 0 ? "Mans" : "Womans" }}</a></li> 
                                     <li class="product-stock-status">Brand: <a href="#">{{ $data_response["data"]->brand_name }}</a></li> 
                                 </ul> 
+                                <input type="hidden" class="product-id" value="{{ $data_response["data"]->id }}">
+                                
+                                <div class="single-add-to-cart">
+                                    <div class="cart-quantity d-flex">
+                                        <div class="quantity">
+                                            <div class="cart-plus-minus">
+                                                <input type="number" class="input-text product-quantity" name="quantity" value="1" title="Qty" style="width: 70px;">
+                                            </div>
+                                        </div>
+                                        <div class="quantity">
+                                            <div class="cart-plus-minus">
+                                                <select name="" class="input-text product-color" id="" style="width: 80px;height: 40px; border: 1px solid #ddd; padding: 0 0 0 10px; background-color: #fff;">
+                                                    <?php foreach ($data_response["color"] as $key => $value): ?>
+                                                        <option value="<?php echo($value->color_id) ; ?>"><?php echo($value->name) ; ?></option>
+                                                    <?php endforeach ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button 
+                                            class="add-to-cart action-add-to-card" 
+                                            atr="Add to card" 
+                                            type="submit" 
+                                            data-id="{{ $data_response["data"]->id }}" 
+                                            style="width: 70px;"
+                                        >
+                                            Add To Cart
+                                        </button>
+                                    </div>
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -111,7 +131,6 @@
                                         <div class="product_desc mb-30">
                                             <p>{{ $data_response["data"]->description }}</p>
                                         </div>
-
                                     </div>
                                 </div>
                                 <!-- End Single Content -->
@@ -203,6 +222,6 @@
 
 
 @section('js')
-<script type="text/javascript" src="{{ asset('customer/assets/js/page/index.js') }}"></script>
+<!-- <script type="text/javascript" src="{{ asset('customer/assets/js/page/index.js') }}"></script> -->
 @endsection()
         

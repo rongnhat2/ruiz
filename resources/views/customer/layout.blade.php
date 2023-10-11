@@ -43,6 +43,28 @@
 <body>
 
     <div class="main-wrapper">
+        <header>
+
+            <div class="header-top-area d-none d-lg-block text-color-white bg-gren border-bm-1">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="header-top-settings">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="top-info-wrap text-end">
+                                <ul class="my-account-container">
+                                    <li><a href="my-account.html">My account</a></li>
+                                    <li><a href="checkout.html">Checkout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             <!-- haeader Mid Start -->
             <div class="haeader-mid-area bg-gren border-bm-1 d-none d-lg-block ">
                 <div class="container">
@@ -78,13 +100,8 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="right-blok-box text-white d-flex">
-
-                                <div class="user-wrap">
-                                    <a href="wishlist.html"><span class="cart-total">2</span> <i class="icon-heart"></i></a>
-                                </div>
-
-                                <div class="shopping-cart-wrap">
-                                    <a href="#"><i class="icon-basket-loaded"></i><span class="cart-total">2</span></a> 
+                                <div class="shopping-cart-wrap cart-count">
+                                    <a href="cart"><i class="icon-basket-loaded"></i><span class="cart-total count"></span></a> 
                                 </div>
                             </div>
                         </div>
@@ -122,55 +139,8 @@
                         <div class="col-lg-3 col-md-6 col-7 d-block d-lg-none">
                             <div class="right-blok-box text-white d-flex">
 
-                                <div class="user-wrap">
-                                    <a href="wishlist.html"><span class="cart-total">2</span> <i class="icon-heart"></i></a>
-                                </div>
-
-                                <div class="shopping-cart-wrap">
-                                    <a href="#"><i class="icon-basket-loaded"></i><span class="cart-total">2</span></a>
-                                    <ul class="mini-cart">
-                                        <li class="cart-item">
-                                            <div class="cart-image">
-                                                <a href="product-details.html"><img alt="" src="{{ asset("assets/images/product/product-02.png") }}"></a>
-                                            </div>
-                                            <div class="cart-title">
-                                                <a href="product-details.html">
-                                                    <h4>Product Name 01</h4>
-                                                </a>
-                                                <div class="quanti-price-wrap">
-                                                    <span class="quantity">1 ×</span>
-                                                    <div class="price-box"><span class="new-price">$130.00</span></div>
-                                                </div>
-                                                <a class="remove_from_cart" href="#"><i class="fa fa-times"></i></a>
-                                            </div>
-                                        </li>
-                                        <li class="cart-item">
-                                            <div class="cart-image">
-                                                <a href="product-details.html"><img alt="" src="{{ asset("assets/images/product/product-03.png") }}"></a>
-                                            </div>
-                                            <div class="cart-title">
-                                                <a href="product-details.html">
-                                                    <h4>Product Name 03</h4>
-                                                </a>
-                                                <div class="quanti-price-wrap">
-                                                    <span class="quantity">1 ×</span>
-                                                    <div class="price-box"><span class="new-price">$130.00</span></div>
-                                                </div>
-                                                <a class="remove_from_cart" href="#"><i class="icon-trash icons"></i></a>
-                                            </div>
-                                        </li>
-                                        <li class="subtotal-box">
-                                            <div class="subtotal-title">
-                                                <h3>Sub-Total :</h3><span>$ 260.99</span>
-                                            </div>
-                                        </li>
-                                        <li class="mini-cart-btns">
-                                            <div class="cart-btns">
-                                                <a href="cart.html">View cart</a>
-                                                <a href="checkout.html">Checkout</a>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                <div class="shopping-cart-wrap cart-count">
+                                    <a href="cart"><i class="icon-basket-loaded"></i><span class="cart-total count"></span></a>
                                 </div>
 
                                 <div class="mobile-menu-btn d-block d-lg-none">
@@ -181,9 +151,6 @@
 
                             </div>
                         </div>
-                        
-                        
-                        
                     </div>
                 </div>
             </div>
@@ -356,7 +323,6 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="copy-right-image">
                                 <img src="{{ asset("assets/images/icon/img-payment.png") }}" alt="">
-
                             </div>
                         </div>
                     </div>
@@ -400,8 +366,8 @@
 
     <!-- Main JS -->
     <script src="{{ asset("assets/js/main.js") }}"></script>
-    <script src="{{ asset('manager/assets/js/api.js') }}"></script>
-    <script src="{{ asset('manager/assets/js/layout.js') }}"></script>
+    <script src="{{ asset('assets/js/api.js') }}"></script>
+    <script src="{{ asset('assets/js/layout.js') }}"></script>
     @yield('js')
 
 </body>

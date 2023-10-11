@@ -19,6 +19,12 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
     public function get_all(){
         return DB::table('product')->get(); 
     }
+    public function get_all_new(){
+        return DB::table('product')
+            ->orderBy('created_at', 'ASC')
+            ->limit(8)
+            ->get(); 
+    }
     public function get_one($id){
         return DB::table('product')
                 ->where("product.id", "=", $id)
@@ -34,7 +40,8 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
     public function get_color($id){
         return DB::table('product_color')
                 ->where("product_color.product_id", "=", $id)
-                ->first(); 
+                ->leftjoin("color", "product_color.color_id", "=", "color.id")
+                ->get(); 
     }
  
 }

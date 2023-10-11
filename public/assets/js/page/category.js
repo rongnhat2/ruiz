@@ -10,13 +10,7 @@ const View = {
                                     <div class="product-thumb">
                                         <a href="/product/${v.slug}">
                                             <img class="primary-image" src="/${v.images.split(",")[0]}" alt="">
-                                        </a>
-                                        <div class="label-product label_new">New</div> 
-                                        <ul class="watch-color">
-                                            <li class="twilight"><span></span></li>
-                                            <li  class="portage"><span></span></li>
-                                            <li class="pigeon"><span></span></li>
-                                        </ul>
+                                        </a> 
                                     </div>
                                     <div class="product-caption">
                                         <h4 class="product-name"><a href="/product/${v.slug}">${v.name}</a></h4>

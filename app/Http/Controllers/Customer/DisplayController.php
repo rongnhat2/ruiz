@@ -28,9 +28,13 @@ class DisplayController extends Controller
             "data" => $data,
             "color" => $color
         ];
+        // dd($data_response["color"]);
         return view('customer.product', compact("data_response"));
     }
     public function category(){
         return view('customer.category');
+    }
+    public function cart(){
+        return view('customer.cart');
     }
 }

@@ -10,12 +10,6 @@ const View = {
                                         <a href="/product/${v.slug}">
                                             <img class="primary-image" src="/${v.images.split(",")[0]}" alt="">
                                         </a>
-                                        <div class="label-product label_new">New</div> 
-                                        <ul class="watch-color">
-                                            <li class="twilight"><span></span></li>
-                                            <li class="pigeon"><span></span></li>
-                                            <li  class="portage"><span></span></li>
-                                        </ul>
                                     </div>
                                     <div class="product-caption">
                                         <h4 class="product-name"><a href="/product/${v.slug}">${v.name}</a></h4>
@@ -85,9 +79,9 @@ const View = {
         await getData();
     } 
 
- 
+
     function getData(){
-        Api.Product.GetAll()
+        Api.Product.GetAllNew()
             .done(res => {
                 View.Product.render(res.data)
             })

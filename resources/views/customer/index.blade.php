@@ -90,7 +90,6 @@
                         </div>
                     </div>
                 </div>
-               
                 <div class="row product-active-lg-4 data-list">
 
                 </div>

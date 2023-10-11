@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Mail; 
 
-use App\Repositories\CustomerRepository;
-use App\Models\CustomerAuth;
 
 use App\Repositories\Manager\OrderRepository;
-use App\Models\Order;
+use App\Models\OrderList;
 use App\Models\OrderDetail; 
 
 use App\Repositories\Manager\ProductRepository;
@@ -26,12 +24,10 @@ class OrderController extends Controller
 {
     
     protected $product;
-    protected $customer;
     protected $order;
     protected $order_detail;
 
-    public function __construct(Product $product, CustomerAuth $customer, Order $order, OrderDetail $order_detail){
-        $this->customer         = new CustomerRepository($customer);
+    public function __construct(Product $product, OrderList $order, OrderDetail $order_detail){
         $this->order            = new OrderRepository($order);
         $this->order_detail     = new OrderRepository($order_detail); 
         $this->product          = new ProductRepository($product);
@@ -62,17 +58,19 @@ class OrderController extends Controller
     
     // Đặt hàng
     public function checkout(Request $request){ 
-        $is_user = static::check_token($request); 
-        $metadata = json_decode($request->metadata); 
 
-        $customer_id         = $request->data_id ? preg_replace('/(<([^>]+)>)/', '', $request->data_id) : "";
         $name       = preg_replace('/(<([^>]+)>)/', '', $request->data_name);
         $email      = preg_replace('/(<([^>]+)>)/', '', $request->data_email);
         $address    = preg_replace('/(<([^>]+)>)/', '', $request->data_address);
         $phone      = preg_replace('/(<([^>]+)>)/', '', $request->data_phone);
-        $zipcode      = preg_replace('/(<([^>]+)>)/', '', $request->data_zipcode);
         $description      = preg_replace('/(<([^>]+)>)/', '', $request->data_description);
 
+        Mail::send('customer/confirm-order', array('data'=> $name), function($message) use ($email) {
+            $message->from('admin.ruiz@gmail.com', 'Ruiz - Order email');
+            $message->to($email)->subject('Ruiz-order');
+        });
+
+        return true;
         $sub_total  = 0;
         $discount   = 0;
         $total      = 0; 
@@ -136,8 +134,8 @@ class OrderController extends Controller
                 'order_data_description'    => $description,
             ];
             Mail::send('customer/confirm-order', array('data'=> $data), function($message) use ($email) {
-                $message->from('sbtc.support@gmail.com', 'SBTC - Order email');
-                $message->to($email)->subject('ご注文ありがとうございます');
+                $message->from('admin.ruiz@gmail.com', 'Ruiz - Order email');
+                $message->to($email)->subject('Ruiz-order');
             });
             DB::commit(); 
             if ($customer_id) { 

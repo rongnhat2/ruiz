@@ -37,6 +37,7 @@
     <!-- Main Style CSS (Please use minify version for better website load performance) -->
     <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
     <!--<link rel="stylesheet" href="{{ asset("assets/css/style.min.css") }}">-->
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head>
 

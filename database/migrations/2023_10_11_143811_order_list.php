@@ -15,6 +15,7 @@ class OrderList extends Migration
     {
         Schema::create('order_list', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('customer_id')->nullable();
             $table->string('username');
             $table->string('email');
             $table->string('address');

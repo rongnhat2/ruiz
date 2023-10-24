@@ -35,7 +35,7 @@
                         <div class="coupon-area">
                             <!-- coupon-accordion start -->
                             <div class="coupon-accordion">
-                                <h3>Returning customer? <span class="coupon" id="showlogin"><a href="">Click here to login</a></span></h3>
+                                <h3>Returning customer? <span class="coupon" id="showlogin"><a href="/login">Click here to login</a></span></h3>
                                  
                             </div>
                             <!-- coupon-accordion end -->

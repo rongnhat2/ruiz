@@ -9,6 +9,6 @@ class OrderList extends Model
 {
     use HasFactory;
     protected $table = 'order_list';
-    protected $fillable = ['username', 'email', 'address', 'phone', 'note', 
+    protected $fillable = ['customer_id', 'username', 'email', 'address', 'phone', 'note', 
     'total', 'payment_value', 'payment_status', 'order_value', 'order_status', 'status', 'created_at', 'updated_at'];
 }

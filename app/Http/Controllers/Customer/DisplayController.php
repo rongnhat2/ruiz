@@ -40,4 +40,10 @@ class DisplayController extends Controller
     public function checkout(){
         return view('customer.checkout');
     }
+    public function login(){
+        return view('customer.login');
+    }
+    public function register(){
+        return view('customer.register');
+    }
 }

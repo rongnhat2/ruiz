@@ -21,6 +21,10 @@ Route::get('cart', 'Customer\DisplayController@cart')->name('customer.view.cart'
 Route::get('checkout', 'Customer\DisplayController@checkout')->name('customer.view.checkout'); 
 
 
+Route::get('register', 'Customer\DisplayController@register')->name('customer.view.register'); 
+Route::get('login', 'Customer\DisplayController@login')->name('customer.view.login'); 
+
+
 Route::prefix('customer')->group(function () {
     Route::prefix('apip')->group(function () {
         Route::prefix('auth')->group(function () {

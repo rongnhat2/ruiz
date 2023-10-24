@@ -57,7 +57,7 @@
                         <div class="col-lg-6">
                             <div class="top-info-wrap text-end">
                                 <ul class="my-account-container">
-                                    <li><a href="my-account.html">My account</a></li>
+                                    <li><a href="/login">My account</a></li>
                                     <li><a href="/checkout">Checkout</a></li>
                                 </ul>
                             </div>
@@ -215,7 +215,7 @@
                             <div class="top-info-wrap text-left text-black">
                                 <h5>My Account</h5>
                                 <ul class="offcanvas-account-container">
-                                    <li><a href="my-account.html">My account</a></li>
+                                    <li><a href="//login">My account</a></li>
                                     <li><a href="cart.html">Cart</a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>

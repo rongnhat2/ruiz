@@ -65,10 +65,10 @@ Route::prefix('customer')->group(function () {
             Route::get('/delete/{id}', 'Admin\BrandController@delete')->name('admin.brand.delete');
         });
         Route::prefix('product')->group(function () {
-            Route::get('/get-all-new', 'Admin\ProductController@get_all_new')->name('admin.product.get_all_new');
-            Route::get('/get-one/{id}', 'Admin\ProductController@get_one')->name('admin.product.get_one');
+            Route::get('get-all-new', 'Admin\ProductController@get_all_new')->name('admin.product.get_all_new');
+            Route::get('get-one/{id}', 'Admin\ProductController@get_one')->name('admin.product.get_one');
 
-            
+
             Route::get('get-all', 'Customer\ProductController@get_all')->name('customer.product.get.all');
             Route::get('get-trending', 'Customer\ProductController@get_trending')->name('customer.product.get.trending');
             Route::get('get-new-arrivals', 'Customer\ProductController@get_new_arrivals')->name('customer.product.get.new_arrivals');

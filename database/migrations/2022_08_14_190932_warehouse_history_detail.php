@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Customer extends Migration
+class WarehouseHistoryDetail extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class Customer extends Migration
      */
     public function up()
     {
-        Schema::create('customer_auth', function (Blueprint $table) {
+        Schema::create('warehouse_history_detail', function (Blueprint $table) {
             $table->increments('id');
-            $table->Integer('secret_key');
-            $table->string('email');
-            $table->string('password');
-            $table->string('verify_code')->nullable();
-            $table->Integer('login_type');
-            $table->Integer('view_type');
+            $table->Integer('warehouse_history_id');
+            $table->Integer('product_id');  
+            $table->Integer('quantity');  
+            $table->Integer('prices');  
             $table->integer('status')->default(1);
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
@@ -34,6 +32,6 @@ class Customer extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_auth');
+        Schema::dropIfExists('warehouse_history');
     }
 }

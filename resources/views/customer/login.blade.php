@@ -39,17 +39,17 @@
                         </div>
                         <!-- login-register-tab-list end -->
                         <div class="tab-content">
-                            <div id="lg1" class="tab-pane active">
+                            <div id="login" class="tab-pane active">
                                 <div class="login-form-container">
                                     <div class="login-register-form"> 
                                         <div  >
                                             <div class="login-input-box">
-                                                <input type="text" name="user-name" placeholder="User Name">
-                                                <input type="password" name="user-password" placeholder="Password">
+                                                <input type="email" name="user-name" placeholder="Email" class="data-email">
+                                                <input type="password" name="user-password" placeholder="Password" class="data-password">
                                             </div>
                                             <div class="button-box"> 
                                                 <div class="button-box">
-                                                    <button class="login-btn btn" ><span>Login</span></button>
+                                                    <button class="login-btn btn form-submit"  atr="Login"><span>Login</span></button>
                                                 </div>
                                             </div>
                                             <div class=" mt-3"> 

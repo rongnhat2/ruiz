@@ -1,4 +1,158 @@
 const IndexView = {
+    Auth: {
+        isLogin(){
+            return $("#auth-value").val() == 1 ? true : false;
+        },
+        Register: {
+            resource: "#signup",
+            getVal(){
+                var resource = this.resource;
+                var fd = new FormData();
+                var required_data = [];
+                var onPushData = true;
+
+                var data_email              = $(`${resource}`).find('.data-email').val();
+                var data_password           = $(`${resource}`).find('.data-password').val();
+                var data_name               = $(`${resource}`).find('.data-name').val();
+
+                if (IndexView.Config.isEmail(data_email) == null || data_email == '')  onPushData = false; 
+                if (data_password == "")  onPushData = false; 
+                if (data_name == "")  onPushData = false;
+
+                if (onPushData) {
+                    fd.append('data_email', data_email);
+                    fd.append('data_password', data_password); 
+                    fd.append('data_name', data_name);
+                    return fd;
+                }else{ 
+                    return false;
+                }
+            },
+            onPush(name, callback){
+                var resource = this.resource;
+                $(document).on('click', `${resource} .form-submit`, function() {
+                    if($(this).attr('atr').trim() == name) {
+                        var data = IndexView.Auth.Register.getVal();
+                        if (data) callback(data); 
+                    }
+                });
+            },
+            init(){
+                $(document).on('keypress', `.data-phone`, function(event) {
+                    return IndexView.Config.onNumberKey(event);
+                });
+            }
+        },
+        Login: {
+            resource: "#login",
+            getVal(){
+                var resource = this.resource;
+                var fd = new FormData();
+                var required_data = [];
+                var onPushData = true;
+
+                var data_email              = $(`${resource}`).find('.data-email').val();
+                var data_password           = $(`${resource}`).find('.data-password').val(); 
+
+                if (IndexView.Config.isEmail(data_email) == null || data_email == '')  onPushData = false; 
+                if (data_password == "")  onPushData = false; 
+
+                if (onPushData) {
+                    fd.append('data_email', data_email);
+                    fd.append('data_password', data_password);  
+                    return fd;
+                }else{ 
+                    return false;
+                }
+            },
+            onPush(name, callback){
+                var resource = this.resource;
+                $(document).on('click', `${resource} .form-submit`, function() {
+                    if($(this).attr('atr').trim() == name) {
+                        var data = IndexView.Auth.Login.getVal();
+                        if (data) callback(data); 
+                    }
+                });
+            },
+            init(){
+                $(document).on('keypress', `.data-phone`, function(event) {
+                    return IndexView.Config.onNumberKey(event);
+                });
+            }
+        },
+        Forgot: {
+            resource: "#forgotPassword",
+            getVal(){
+                var resource = this.resource;
+                var fd = new FormData();
+                var required_data = [];
+                var onPushData = true;
+                var data_email              = $(`${resource}`).find('.data-email').val(); 
+                if (IndexView.Config.isEmail(data_email) == null || data_email == '')  onPushData = false;  
+                if (onPushData) {
+                    fd.append('data_email', data_email); 
+                    return fd;
+                }else{ 
+                    return false;
+                }
+            },
+            onPush(name, callback){
+                var resource = this.resource;
+                $(document).on('click', `${resource} .form-submit`, function() {
+                    if($(this).attr('atr').trim() == name) {
+                        var data = IndexView.Auth.Forgot.getVal();
+                        if (data) callback(data); 
+                    }
+                });
+            },
+        },
+        Reset: {
+            resource: "#forgotPassword",
+            getVal(){
+                var resource = this.resource;
+                var fd = new FormData();
+                var required_data = [];
+                var onPushData = true;
+                var data_email              = $(`${resource}`).find('.data-email').val(); 
+                var data_password              = $(`${resource}`).find('.data-password').val();
+                var data_code              = $(`${resource}`).find('.data-code').val();
+                if (IndexView.Config.isEmail(data_email) == null || data_email == '')  onPushData = false;  
+                if (data_password == "")  onPushData = false; 
+                if (data_code == "")  onPushData = false; 
+
+                if (onPushData) {
+                    fd.append('data_email', data_email); 
+                    fd.append('data_password', data_password); 
+                    fd.append('data_code', data_code); 
+                    return fd;
+                }else{ 
+                    return false;
+                }
+            },
+            onPush(name, callback){
+                var resource = this.resource;
+                $(document).on('click', `${resource} .form-submit`, function() {
+                    if($(this).attr('atr').trim() == name) {
+                        var data = IndexView.Auth.Reset.getVal();
+                        if (data) callback(data); 
+                    }
+                });
+            },
+        },
+        response: { 
+            success(message){
+                $(".js-validate .js-response").remove();
+                $(".js-validate").prepend(`<div class="js-response js-success"><li>${message}</li></div>`)
+            },
+            error(message){
+                $(".js-validate .js-response").remove();
+                $(".js-validate").prepend(`<div class="js-response js-errors"><li>${message}</li></div>`)
+            },                  
+        },
+        init(){
+            IndexView.Auth.Register.init()
+        }
+    },
     Cart: {
         add_to_card(name, callback){
             $(document).on('click', `.action-add-to-card`, function() {
@@ -90,7 +244,44 @@ const IndexView = {
     function init(){
 
     }
+    async function redirect_logined(url) {
+        await delay(2000);
+        window.location.replace(url);
+    }
+    function delay(delayInms) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve(2);
+            }, delayInms);
+        });
+    }
     
+    IndexView.Auth.Register.onPush("Register", (fd) => {
+        Api.Auth.Register(fd)
+            .done(res => {  
+                if (res.status == 200) {
+                    IndexView.Auth.response.error(res.message); 
+                }else{
+                    IndexView.Auth.response.success(res.message) 
+                    redirect_logined(res.data)
+                }
+            })
+            .fail(err => {   })
+            .always(() => { });
+    }) 
+    IndexView.Auth.Login.onPush("Login", (fd) => {
+        Api.Auth.Login(fd)
+            .done(res => {  
+                if (res.status == 500) {
+                    IndexView.Auth.response.error(res.message); 
+                }else{
+                    IndexView.Auth.response.success(res.message) ;
+                    redirect_logined(res.data)
+                }
+            })
+            .fail(err => {   })
+            .always(() => { });
+    })
     IndexView.onSearch((fd, text) => {
         Api.Product.GetSearch(fd).done(res => { 
             $('.suggest-list .suggess-wrapper').remove()

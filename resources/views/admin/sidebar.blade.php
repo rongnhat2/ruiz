@@ -33,6 +33,14 @@
                     <span class="title">Order</span>
                 </a>
             </li>
+            <li class="nav-item dropdown warehouse-group">
+                <a class="dropdown-toggle warehouse" href="{{ route('admin.warehouse.index') }}">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-hdd"></i>
+                    </span>
+                    <span class="title">Warehouse</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

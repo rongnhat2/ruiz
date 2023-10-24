@@ -43,6 +43,8 @@
 
 <body>
 
+    <input type="hidden" class="auth-value" id="auth-value" value="<?php echo $customer_data['is_login']; ?>">
+    <input type="hidden" class="view-value" id="view-value" value="<?php echo $customer_data['view_type'] ?? 0; ?>">
     <div class="main-wrapper">
         <header>
 
@@ -57,7 +59,11 @@
                         <div class="col-lg-6">
                             <div class="top-info-wrap text-end">
                                 <ul class="my-account-container">
+                                    <?php if ($customer_data['is_login']): ?>  
+                                    <li><a href="/profile">{{$customer_data['name']}}</a></li>
+                                    <?php else: ?>
                                     <li><a href="/login">My account</a></li>
+                                    <?php endif ?> 
                                     <li><a href="/checkout">Checkout</a></li>
                                 </ul>
                             </div>
@@ -191,34 +197,19 @@
                         </div>
                         <!-- mobile menu end -->
 
-
-                        <div class="header-top-settings offcanvas-curreny-lang-support">
-                            <h5>My Account</h5>
-                            <ul class="nav align-items-center">
-                                <li class="language">English <i class="fa fa-angle-down"></i>
-                                    <ul class="dropdown-list">
-                                        <li><a href="#">English</a></li>
-                                        <li><a href="#">French</a></li>
-                                    </ul>
-                                </li>
-                                <li class="curreny-wrap">Currency <i class="fa fa-angle-down"></i>
-                                    <ul class="dropdown-list curreny-list">
-                                        <li><a href="#">$ USD</a></li>
-                                        <li><a href="#"> € EURO</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-
+ 
                         <!-- offcanvas widget area start -->
                         <div class="offcanvas-widget-area">
                             <div class="top-info-wrap text-left text-black">
                                 <h5>My Account</h5>
                                 <ul class="offcanvas-account-container">
-                                    <li><a href="//login">My account</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <?php if ($customer_data['is_login']): ?>  
+                                    <li><a href="/profile">{{$customer_data['name']}}</a></li>
+                                    <?php else: ?>
+                                    <li><a href="/login">My account</a></li>
+                                    <?php endif ?> 
+                                    <li><a href="/cart">Cart</a></li>
+                                    <li><a href="/checkout">Checkout</a></li>
                                 </ul>
                             </div>
 

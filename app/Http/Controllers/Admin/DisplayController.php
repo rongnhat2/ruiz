@@ -13,4 +13,7 @@ class DisplayController extends Controller
     public function color(){
         return view('admin.manager.color');
     }
+    public function login(){
+        return view('admin.auth.login');
+    }
 }

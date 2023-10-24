@@ -43,14 +43,14 @@
                             <div  class="tab-pane active">
                                 <div class="login-form-container">
                                     <div class="login-register-form">
-                                        <div  >
+                                        <div id="signup" >
                                             <div class="login-input-box">
-                                                <input type="text" name="user-name" placeholder="User Name">
-                                                <input type="password" name="user-password" placeholder="Password">
-                                                <input name="user-email" placeholder="Email" type="email">
+                                                <input type="text" class="data-name" name="user-name" placeholder="User Name">
+                                                <input name="user-email" class="data-email" placeholder="Email" type="email">
+                                                <input type="password" class="data-password" name="user-password" placeholder="Password">
                                             </div>
                                             <div class="button-box">
-                                                <button class="register-btn btn" type="submit"><span>Register</span></button>
+                                                <button class="register-btn btn form-submit" atr="Register"><span>Register</span></button>
                                             </div>
                                             <div class=" mt-3"> 
                                                 <label>Have a account ?</label>

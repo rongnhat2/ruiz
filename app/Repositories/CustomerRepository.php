@@ -71,26 +71,14 @@ class CustomerRepository extends BaseRepository implements RepositoryInterface
                     WHERE id = ".$id;
         return DB::select($sql);
     } 
-    // Lấy ra số dư tài khoản nạp
-    public function get_coin_one($id){
-        return $this->model->where('customer_id', '=', $id)->first()->coin; 
-    }
-    // Lấy ra số dư tài khoản khả dụng
-    public function get_coin_visible($id){
-        return $this->model->where('customer_id', '=', $id)->first()->coin_visible; 
-    }
-
-    // Cập nhật số dư mặc định
-    public function update_coin_defaul_customer($id, $coin){
-        return $this->model
-                    ->where('customer_id', '=', $id)
-                    ->update(['coin' => $coin]);
-    }
-    // Cập nhật số dư khả dụng
-    public function update_coin_availability_customer($id, $coin){
-        return $this->model
-                    ->where('customer_id', '=', $id)
-                    ->update(['coin_visible' => $coin]);
+    // Kiểm tra Email / Mật khẩu
+    public function checkEmailPassword($request){
+        $user = $this->model->where('email', '=', $request->data_email)->first();
+        if ($user) {
+            return Hash::check($request->data_password, $user->password) ? $user->id : false;
+        }else{
+            return false;
+        }
     }
 
     

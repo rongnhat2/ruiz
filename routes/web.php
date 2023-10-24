@@ -24,6 +24,14 @@ Route::get('checkout', 'Customer\DisplayController@checkout')->name('customer.vi
 Route::get('register', 'Customer\DisplayController@register')->name('customer.view.register'); 
 Route::get('login', 'Customer\DisplayController@login')->name('customer.view.login'); 
 
+Route::middleware(['AuthCustomer:login'])->group(function () {
+    Route::get('register', 'Customer\DisplayController@register')->name('customer.view.register'); 
+    Route::get('login', 'Customer\DisplayController@login')->name('customer.view.login'); 
+});
+Route::middleware(['AuthCustomer:logined'])->group(function () {
+    Route::post('logout', 'Customer\AuthController@logout')->name('customer.logout');
+    Route::get('profile', 'Customer\DisplayController@profile')->name('admin.profile.index');
+});
 
 Route::prefix('customer')->group(function () {
     Route::prefix('apip')->group(function () {
@@ -69,74 +77,96 @@ Route::prefix('customer')->group(function () {
     });
 });
 
-
-
-Route::prefix('admin')->group(function () {
-    Route::post('logout', 'Admin\AuthController@logout')->name('admin.logout');
-    
-    Route::get('/', 'Admin\DisplayController@statistic')->name('admin.statistic.index');
-
-    Route::prefix('color')->group(function () {
-        Route::get('/', 'Admin\ColorController@index')->name('admin.color.index');
-    });
-    Route::prefix('brand')->group(function () {
-        Route::get('/', 'Admin\BrandController@index')->name('admin.brand.index');
-    });
-    Route::prefix('product')->group(function () {
-        Route::get('/', 'Admin\ProductController@index')->name('admin.product.index'); 
-    });
-    
-    Route::prefix('order')->group(function () {
-        Route::get('/', 'Admin\OrderController@index')->name('admin.order.index');
-    });
-
-
-
-    Route::prefix('category')->group(function () {
-        Route::get('/', 'Admin\CategoryController@index')->name('admin.category.index');
-    });
-    Route::prefix('discount')->group(function () {
-        Route::get('/', 'Admin\DiscountController@index')->name('admin.discount.index');
-    });
-    Route::prefix('warehouse')->group(function () {
-        Route::get('/', 'Admin\WarehouseController@index')->name('admin.warehouse.index');
-    });
-    Route::prefix('customer')->group(function () {
-        Route::get('/', 'Admin\CustomerController@index')->name('admin.customer.index');
-    });
-    Route::prefix('watermark')->group(function () {
-        Route::get('/', 'Admin\DisplayController@watermark')->name('admin.watermark.index');
-    });
-    Route::prefix('manager')->group(function () {
-        Route::get('/', 'Admin\ManagerController@index')->name('admin.manager.index');
+Route::middleware(['AuthAdmin:auth'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/login', 'Admin\DisplayController@login')->name('admin.login');
+        Route::post('/login', 'Admin\AuthController@login')->name('admin.login');
     });
 });
-Route::prefix('apip')->group(function () {
-    Route::post('post-image', 'Admin\DisplayController@image')->name('admin.image.post');
 
-    Route::prefix('color')->group(function () {
-        Route::get('/get', 'Admin\ColorController@get')->name('admin.color.get');
-        Route::post('/store', 'Admin\ColorController@store')->name('admin.color.store');
-        Route::get('/get-one/{id}', 'Admin\ColorController@get_one')->name('admin.color.get_one');
-        Route::post('/update', 'Admin\ColorController@update')->name('admin.color.update');
-        Route::get('/delete/{id}', 'Admin\ColorController@delete')->name('admin.color.delete');
-    });
-    Route::prefix('brand')->group(function () {
-        Route::get('/get', 'Admin\BrandController@get')->name('admin.brand.get');
-        Route::post('/store', 'Admin\BrandController@store')->name('admin.brand.store');
-        Route::get('/get-one/{id}', 'Admin\BrandController@get_one')->name('admin.brand.get_one');
-        Route::post('/update', 'Admin\BrandController@update')->name('admin.brand.update');
-        Route::get('/delete/{id}', 'Admin\BrandController@delete')->name('admin.brand.delete');
-    });
-    Route::prefix('product')->group(function () {
-        Route::get('/get', 'Admin\ProductController@get')->name('admin.product.get');
-        Route::get('/get-all-new', 'Admin\ProductController@get_all_new')->name('admin.product.get_all_new');
-        Route::post('/store', 'Admin\ProductController@store')->name('admin.product.store');
-        Route::get('/get-one/{id}', 'Admin\ProductController@get_one')->name('admin.product.get_one');
-        Route::post('/update', 'Admin\ProductController@update')->name('admin.product.update');
-        Route::get('/delete/{id}', 'Admin\ProductController@delete')->name('admin.product.delete');
-    });
 
+Route::middleware(['AuthAdmin:admin'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::post('logout', 'Admin\AuthController@logout')->name('admin.logout');
+        
+        Route::get('/', 'Admin\DisplayController@statistic')->name('admin.statistic.index');
+
+        Route::prefix('color')->group(function () {
+            Route::get('/', 'Admin\ColorController@index')->name('admin.color.index');
+        });
+        Route::prefix('brand')->group(function () {
+            Route::get('/', 'Admin\BrandController@index')->name('admin.brand.index');
+        });
+        Route::prefix('product')->group(function () {
+            Route::get('/', 'Admin\ProductController@index')->name('admin.product.index'); 
+        });
+        Route::prefix('watermark')->group(function () {
+            Route::get('/', 'Admin\DisplayController@watermark')->name('admin.watermark.index');
+        });
+        
+        Route::prefix('order')->group(function () {
+            Route::get('/', 'Admin\OrderController@index')->name('admin.order.index');
+        });
+
+
+
+        Route::prefix('category')->group(function () {
+            Route::get('/', 'Admin\CategoryController@index')->name('admin.category.index');
+        });
+        Route::prefix('discount')->group(function () {
+            Route::get('/', 'Admin\DiscountController@index')->name('admin.discount.index');
+        });
+        Route::prefix('warehouse')->group(function () {
+            Route::get('/', 'Admin\WarehouseController@index')->name('admin.warehouse.index');
+        });
+        Route::prefix('customer')->group(function () {
+            Route::get('/', 'Admin\CustomerController@index')->name('admin.customer.index');
+        });
+        Route::prefix('manager')->group(function () {
+            Route::get('/', 'Admin\ManagerController@index')->name('admin.manager.index');
+        });
+    });
+    Route::prefix('apip')->group(function () {
+        Route::post('post-image', 'Admin\DisplayController@image')->name('admin.image.post');
+
+        Route::prefix('color')->group(function () {
+            Route::get('/get', 'Admin\ColorController@get')->name('admin.color.get');
+            Route::post('/store', 'Admin\ColorController@store')->name('admin.color.store');
+            Route::get('/get-one/{id}', 'Admin\ColorController@get_one')->name('admin.color.get_one');
+            Route::post('/update', 'Admin\ColorController@update')->name('admin.color.update');
+            Route::get('/delete/{id}', 'Admin\ColorController@delete')->name('admin.color.delete');
+        });
+        Route::prefix('brand')->group(function () {
+            Route::get('/get', 'Admin\BrandController@get')->name('admin.brand.get');
+            Route::post('/store', 'Admin\BrandController@store')->name('admin.brand.store');
+            Route::get('/get-one/{id}', 'Admin\BrandController@get_one')->name('admin.brand.get_one');
+            Route::post('/update', 'Admin\BrandController@update')->name('admin.brand.update');
+            Route::get('/delete/{id}', 'Admin\BrandController@delete')->name('admin.brand.delete');
+        });
+        Route::prefix('product')->group(function () {
+            Route::get('/get', 'Admin\ProductController@get')->name('admin.product.get');
+            Route::get('/get-all-new', 'Admin\ProductController@get_all_new')->name('admin.product.get_all_new');
+            Route::post('/store', 'Admin\ProductController@store')->name('admin.product.store');
+            Route::get('/get-one/{id}', 'Admin\ProductController@get_one')->name('admin.product.get_one');
+            Route::post('/update', 'Admin\ProductController@update')->name('admin.product.update');
+            Route::get('/delete/{id}', 'Admin\ProductController@delete')->name('admin.product.delete');
+        });
+
+        Route::prefix('warehouse')->group(function () {
+            Route::get('get-item', 'Admin\WarehouseController@get_item')->name('admin.warehouse.item.get');
+            Route::get('get-history', 'Admin\WarehouseController@get_history')->name('admin.warehouse.history.get');
+            Route::get('get-order-fullfil', 'Admin\WarehouseController@get_order_fullfil')->name('admin.warehouse.item.get');
+            Route::get('get-order-export', 'Admin\WarehouseController@get_order_export')->name('admin.warehouse.item.get');
+            Route::get('get-order-shipping', 'Admin\WarehouseController@get_order_shipping')->name('admin.warehouse.item.get');
+
+            Route::post('store', 'Admin\WarehouseController@store')->name('admin.warehouse.store');
+            Route::get('/get-ware-one/{id}', 'Admin\WarehouseController@get_ware_one')->name('admin.warehouse.get_ware_one');
+
+            Route::get('/get-one/{id}', 'Admin\ProductController@get_one')->name('admin.warehouse.get_one');
+            Route::post('/update', 'Admin\ProductController@update')->name('admin.warehouse.update');
+        });
+
+    });
 });
 
 

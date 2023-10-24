@@ -1,4 +1,5 @@
 const Api = {
+    Auth: {},
     Color: {},  
     Brand: {},  
     Product: {},  
@@ -21,6 +22,64 @@ const Api = {
     });
 })();
 
+
+
+//Auth
+(() => {
+    Api.Auth.Register = (data) => $.ajax({
+        url: `/customer/apip/auth/register`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
+    Api.Auth.Login = (data) => $.ajax({
+        url: `/customer/apip/auth/login`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
+    Api.Auth.Forgot = (data) => $.ajax({
+        url: `/customer/apip/auth/forgot`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
+    Api.Auth.Reset = (data) => $.ajax({
+        url: `/customer/apip/auth/reset`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
+    Api.Auth.Code = () => $.ajax({
+        url: `/customer/apip/auth/code`,
+        method: 'POST',
+        contentType: false,
+        processData: false,
+    });
+    Api.Auth.Change = (data) => $.ajax({
+        url: `/customer/apip/auth/change`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
+    Api.Auth.Update = (data) => $.ajax({
+        url: `/customer/apip/auth/update`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
+    Api.Auth.GetProfile = (id) => $.ajax({
+        url: `/customer/apip/auth/get-profile`,
+        method: 'GET',
+    });
+
+})();
 
 //Color
 (() => {

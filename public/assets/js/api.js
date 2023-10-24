@@ -84,7 +84,7 @@ const Api = {
 //Color
 (() => {
     Api.Color.GetAll = () => $.ajax({
-        url: `/apip/color/get`,
+        url: `/customer/apip/color/get`,
         method: 'GET',
     }); 
 })(); 
@@ -92,7 +92,7 @@ const Api = {
 //Brand
 (() => {
     Api.Brand.GetAll = () => $.ajax({
-        url: `/apip/brand/get`,
+        url: `/customer/apip/brand/get`,
         method: 'GET',
     }); 
 })(); 
@@ -100,15 +100,15 @@ const Api = {
 //Product
 (() => {
     Api.Product.GetAll = () => $.ajax({
-        url: `/apip/product/get`,
+        url: `/customer/apip/product/get`,
         method: 'GET',
     }); 
     Api.Product.GetAllNew = () => $.ajax({
-        url: `/apip/product/get-all-new`,
+        url: `/customer/apip/product/get-all-new`,
         method: 'GET',
     }); 
     Api.Product.getOne = (id) => $.ajax({
-        url: `/apip/product/get-one/${id}`,
+        url: `/customer/apip/product/get-one/${id}`,
         method: 'GET',
     });
 })(); 
@@ -117,18 +117,11 @@ const Api = {
 //Category
 (() => {
     Api.Category.GetAll = () => $.ajax({
-        url: `/apip/category/get`,
+        url: `/customer/apip/category/get`,
         method: 'GET',
     }); 
 })(); 
 
-//Size
-(() => {
-    Api.Size.GetAll = () => $.ajax({
-        url: `/apip/size/get`,
-        method: 'GET',
-    }); 
-})(); 
 
 // Order
 (() => {

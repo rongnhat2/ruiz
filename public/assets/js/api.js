@@ -100,15 +100,15 @@ const Api = {
 //Product
 (() => {
     Api.Product.GetAll = () => $.ajax({
-        url: `/customer/apip/product/get`,
+        url: `/apip/product/get`,
         method: 'GET',
     }); 
     Api.Product.GetAllNew = () => $.ajax({
-        url: `/customer/apip/product/get-all-new`,
+        url: `/apip/product/get-all-new`,
         method: 'GET',
     }); 
     Api.Product.getOne = (id) => $.ajax({
-        url: `/customer/apip/product/get-one/${id}`,
+        url: `/apip/product/get-one/${id}`,
         method: 'GET',
     });
 })(); 

@@ -126,47 +126,47 @@ Route::middleware(['AuthAdmin:admin'])->group(function () {
             Route::get('/', 'Admin\ManagerController@index')->name('admin.manager.index');
         });
     });
-    Route::prefix('apip')->group(function () {
-        Route::post('post-image', 'Admin\DisplayController@image')->name('admin.image.post');
-
-        Route::prefix('color')->group(function () {
-            Route::get('/get', 'Admin\ColorController@get')->name('admin.color.get');
-            Route::post('/store', 'Admin\ColorController@store')->name('admin.color.store');
-            Route::get('/get-one/{id}', 'Admin\ColorController@get_one')->name('admin.color.get_one');
-            Route::post('/update', 'Admin\ColorController@update')->name('admin.color.update');
-            Route::get('/delete/{id}', 'Admin\ColorController@delete')->name('admin.color.delete');
-        });
-        Route::prefix('brand')->group(function () {
-            Route::get('/get', 'Admin\BrandController@get')->name('admin.brand.get');
-            Route::post('/store', 'Admin\BrandController@store')->name('admin.brand.store');
-            Route::get('/get-one/{id}', 'Admin\BrandController@get_one')->name('admin.brand.get_one');
-            Route::post('/update', 'Admin\BrandController@update')->name('admin.brand.update');
-            Route::get('/delete/{id}', 'Admin\BrandController@delete')->name('admin.brand.delete');
-        });
-        Route::prefix('product')->group(function () {
-            Route::get('/get', 'Admin\ProductController@get')->name('admin.product.get');
-            Route::get('/get-all-new', 'Admin\ProductController@get_all_new')->name('admin.product.get_all_new');
-            Route::post('/store', 'Admin\ProductController@store')->name('admin.product.store');
-            Route::get('/get-one/{id}', 'Admin\ProductController@get_one')->name('admin.product.get_one');
-            Route::post('/update', 'Admin\ProductController@update')->name('admin.product.update');
-            Route::get('/delete/{id}', 'Admin\ProductController@delete')->name('admin.product.delete');
-        });
-
-        Route::prefix('warehouse')->group(function () {
-            Route::get('get-item', 'Admin\WarehouseController@get_item')->name('admin.warehouse.item.get');
-            Route::get('get-history', 'Admin\WarehouseController@get_history')->name('admin.warehouse.history.get');
-            Route::get('get-order-fullfil', 'Admin\WarehouseController@get_order_fullfil')->name('admin.warehouse.item.get');
-            Route::get('get-order-export', 'Admin\WarehouseController@get_order_export')->name('admin.warehouse.item.get');
-            Route::get('get-order-shipping', 'Admin\WarehouseController@get_order_shipping')->name('admin.warehouse.item.get');
-
-            Route::post('store', 'Admin\WarehouseController@store')->name('admin.warehouse.store');
-            Route::get('/get-ware-one/{id}', 'Admin\WarehouseController@get_ware_one')->name('admin.warehouse.get_ware_one');
-
-            Route::get('/get-one/{id}', 'Admin\ProductController@get_one')->name('admin.warehouse.get_one');
-            Route::post('/update', 'Admin\ProductController@update')->name('admin.warehouse.update');
-        });
-
-    });
 });
 
 
+Route::prefix('apip')->group(function () {
+    Route::post('post-image', 'Admin\DisplayController@image')->name('admin.image.post');
+
+    Route::prefix('color')->group(function () {
+        Route::get('/get', 'Admin\ColorController@get')->name('admin.color.get');
+        Route::post('/store', 'Admin\ColorController@store')->name('admin.color.store');
+        Route::get('/get-one/{id}', 'Admin\ColorController@get_one')->name('admin.color.get_one');
+        Route::post('/update', 'Admin\ColorController@update')->name('admin.color.update');
+        Route::get('/delete/{id}', 'Admin\ColorController@delete')->name('admin.color.delete');
+    });
+    Route::prefix('brand')->group(function () {
+        Route::get('/get', 'Admin\BrandController@get')->name('admin.brand.get');
+        Route::post('/store', 'Admin\BrandController@store')->name('admin.brand.store');
+        Route::get('/get-one/{id}', 'Admin\BrandController@get_one')->name('admin.brand.get_one');
+        Route::post('/update', 'Admin\BrandController@update')->name('admin.brand.update');
+        Route::get('/delete/{id}', 'Admin\BrandController@delete')->name('admin.brand.delete');
+    });
+    Route::prefix('product')->group(function () {
+        Route::get('/get', 'Admin\ProductController@get')->name('admin.product.get');
+        Route::get('/get-all-new', 'Admin\ProductController@get_all_new')->name('admin.product.get_all_new');
+        Route::post('/store', 'Admin\ProductController@store')->name('admin.product.store');
+        Route::get('/get-one/{id}', 'Admin\ProductController@get_one')->name('admin.product.get_one');
+        Route::post('/update', 'Admin\ProductController@update')->name('admin.product.update');
+        Route::get('/delete/{id}', 'Admin\ProductController@delete')->name('admin.product.delete');
+    });
+
+    Route::prefix('warehouse')->group(function () {
+        Route::get('get-item', 'Admin\WarehouseController@get_item')->name('admin.warehouse.item.get');
+        Route::get('get-history', 'Admin\WarehouseController@get_history')->name('admin.warehouse.history.get');
+        Route::get('get-order-fullfil', 'Admin\WarehouseController@get_order_fullfil')->name('admin.warehouse.item.get');
+        Route::get('get-order-export', 'Admin\WarehouseController@get_order_export')->name('admin.warehouse.item.get');
+        Route::get('get-order-shipping', 'Admin\WarehouseController@get_order_shipping')->name('admin.warehouse.item.get');
+
+        Route::post('store', 'Admin\WarehouseController@store')->name('admin.warehouse.store');
+        Route::get('/get-ware-one/{id}', 'Admin\WarehouseController@get_ware_one')->name('admin.warehouse.get_ware_one');
+
+        Route::get('/get-one/{id}', 'Admin\ProductController@get_one')->name('admin.warehouse.get_one');
+        Route::post('/update', 'Admin\ProductController@update')->name('admin.warehouse.update');
+    });
+
+});

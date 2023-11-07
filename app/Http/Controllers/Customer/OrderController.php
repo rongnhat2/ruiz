@@ -111,7 +111,20 @@ class OrderController extends Controller
             ];
             $this->order_detail->create($item_order);
         }
-        Mail::send('customer/confirm-order', array('data'=> $name), function($message) use ($email) {
+        $data = [
+            'email'             => $email,
+            'date_created'      => Carbon::now()->toDateTimeString(),
+            'total'             => $total,
+            'description'      => $description,
+            'customer_login'   => $customer_id ? $customer_id : null,
+            'metadata'          => $metadata,
+            'order_data_name'    => $name,
+            'order_data_phone'    => $phone,
+            'order_data_email'    => $email,
+            'order_data_address'    => $address,
+            'order_data_description'    => $description,
+        ];
+        Mail::send('customer/confirm-order', array('data'=> $data), function($message) use ($email) {
             $message->from('admin.ruiz@gmail.com', 'Ruiz - Order email');
             $message->to($email)->subject('Ruiz-order');
         });

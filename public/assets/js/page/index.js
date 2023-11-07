@@ -76,7 +76,7 @@ const View = {
                             <div class="label-product label_new">New</div> 
                         </div>
                         <div class="product-caption">
-                            <h4 class="product-name"><a href="/product/${v.slug}">Simple Product 015</a></h4>
+                            <h4 class="product-name"><a href="/product/${v.slug}">${v.name}</a></h4>
                             <div class="price-box">
                             <span class="new-price">$${v.prices}</span> 
                             </div>

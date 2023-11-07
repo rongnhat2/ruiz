@@ -147,7 +147,7 @@
         <!-- Product Area End -->
         
         <!-- letast blog area Start -->
-        <div class="letast-blog-area section-pb">
+        <!-- <div class="letast-blog-area section-pb">
             <div class="container">
                 <div class="row">
                     
@@ -201,7 +201,7 @@
                     
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- letast blog area End -->
         
         <!-- our-brand-area start -->

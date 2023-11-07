@@ -71,6 +71,7 @@ Route::prefix('customer')->group(function () {
             Route::get('get-best-sale', 'Admin\ProductController@get_best_sale')->name('admin.product.get_best_sale');
             Route::get('get-one/{id}', 'Admin\ProductController@get_one')->name('admin.product.get_one');
             Route::post('get-search', 'Admin\ProductController@get_search')->name('customer.product.get.search');
+            Route::get('get-related/{id}', 'Admin\ProductController@get_related')->name('customer.product.get.related');
             
         });
         Route::prefix('cart')->group(function () {

@@ -50,6 +50,15 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
                     ORDER BY total DESC LIMIT 5";
         return DB::select($sql);
     }
+    public function get_related($category_id, $id, $limit){ 
+        return DB::table('product') 
+                ->select("product.*", 'brand.name as brand_name') 
+                ->leftjoin('brand', 'product.brand_id', '=', 'brand.id')
+                ->where([["product.brand_id", "=", $category_id], ["product.id", "<>", $id]])
+                ->orderByDesc('product.updated_at')  
+                ->limit($limit)
+                ->get();
+    }
 
     public function find_real_time($slug, $category){
         $where_category = $category == 0 ? "" : " AND category_id = ".$category;

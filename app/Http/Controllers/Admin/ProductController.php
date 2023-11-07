@@ -50,6 +50,12 @@ class ProductController extends Controller
         $slug_data = $this->product->to_slug($text);
         $data = $this->product->find_real_time($slug_data, $category);
         return $this->product->send_response(200, $data, null);
+    }public function get_related($id){
+        $product = $this->product->get_one($id); 
+        
+        $data_product = $this->product->get_related($product->brand_id, $id, 4);
+        
+        return $this->product->send_response(200, $data_product, null);
     }
 
     public function get_one($id){

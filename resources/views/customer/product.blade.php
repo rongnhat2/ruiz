@@ -9,7 +9,7 @@
 
 @section('body')
 
-
+    <input type="hidden" class="product-id" value="{{ $data_response["data"]->id }}">
         <!-- breadcrumb-area start -->
         <div class="breadcrumb-area">
             <div class="container">
@@ -208,12 +208,23 @@
                         </div>
                     </div>
                 </div>
-
+                
+                <div class="related-product-area section-pt">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="section-title">
+                                <h3> Related Product</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row related-product">
+                        
+                    </div>
+                </div>                                            
 
             </div>
         </div>
         <!-- main-content-wrap end -->
-       
 @endsection()
 
 @section('sub_layout')
@@ -222,6 +233,6 @@
 
 
 @section('js')
-<!-- <script type="text/javascript" src="{{ asset('customer/assets/js/page/index.js') }}"></script> -->
+<script type="text/javascript" src="{{ asset('assets/js/page/product.js') }}"></script>
 @endsection()
         

@@ -122,6 +122,10 @@ const Api = {
         contentType: false,
         processData: false,
     });
+    Api.Product.GetRelated = (id) => $.ajax({
+        url: `/customer/apip/product/get-related/${id}`,
+        method: 'GET',
+    });
 })(); 
 
 

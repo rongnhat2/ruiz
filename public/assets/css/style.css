@@ -2929,6 +2929,8 @@ img.mfp-img {
   overflow: hidden;
   white-space: nowrap; 
   text-overflow: ellipsis;
+  display: block;
+  padding: 0 10px;
 }
 .single-product-area .product-caption .new-price {
   color: #c89979;

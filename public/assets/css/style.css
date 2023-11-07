@@ -2923,6 +2923,8 @@ img.mfp-img {
   line-height: 20px;
   padding: 0;
   text-transform: capitalize;
+}
+.single-product-area .product-caption .product-name a{
   
   overflow: hidden;
   white-space: nowrap; 

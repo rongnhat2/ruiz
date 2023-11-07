@@ -22,7 +22,7 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
     public function get_all_new(){
         return DB::table('product')
             ->orderBy('created_at', 'ASC')
-            ->limit(8)
+            ->limit(20)
             ->get(); 
     }
     public function get_best_sale(){

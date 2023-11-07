@@ -192,49 +192,7 @@ heroSlider.slick({
 /*--
     Product Slider
 --------------------------------------------*/
-var product_row_4 = $('.product-active-row-4');
-product_row_4.slick({
-    dots: false,
-    infinite: true,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    rows: 2,
-    autoplay: false,
-    prevArrow: '<button type="button" class="slick-prev"> <i class="fa fa-angle-left"> </i></button>',
-    nextArrow: '<button type="button" class="slick-next"><i class="fa fa-angle-right"> </i></button>',
-    responsive: [
-        {
-            breakpoint: 1199,
-            settings: {
-                slidesToShow: 3,
-            }
-        },
-        {
-            breakpoint: 991,
-            settings: {
-                slidesToShow: 2,
-            }
-        },
-        {
-            breakpoint: 767,
-            settings: {
-                slidesToShow: 2,
-            }
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 2,
-            }
-        },
-        {
-            breakpoint: 479,
-            settings: {
-                slidesToShow: 1,
-            }
-        }
-    ]
-});  
+
     
     
 /*-- 

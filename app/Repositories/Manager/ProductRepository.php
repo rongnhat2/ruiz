@@ -25,6 +25,31 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
             ->limit(8)
             ->get(); 
     }
+    public function get_best_sale(){
+        $sql = " SELECT order_detail.product_id, 
+                        sum(order_detail.quantity) as total, 
+                        warehouse.quantity,
+                        product.name,
+                        product.slug,
+                        product.prices,
+                        product.images
+                    FROM order_list
+                    LEFT JOIN order_detail
+                    ON order_list.id = order_detail.order_id
+                    LEFT JOIN warehouse
+                    ON warehouse.product_id = order_detail.product_id
+                    LEFT JOIN product
+                    ON order_detail.product_id = product.id
+                    WHERE order_status <> 7 
+                    GROUP BY order_detail.product_id, 
+                            warehouse.quantity,
+                            product.name,
+                            product.slug,
+                            product.prices,
+                            product.images
+                    ORDER BY total DESC LIMIT 5";
+        return DB::select($sql);
+    }
     public function get_one($id){
         return DB::table('product')
                 ->where("product.id", "=", $id)

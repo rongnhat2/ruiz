@@ -111,6 +111,10 @@ const Api = {
         url: `/apip/product/get-one/${id}`,
         method: 'GET',
     });
+    Api.Product.getBestSale = () => $.ajax({
+        url: `/customer/apip/product/get-best-sale`,
+        method: 'GET',
+    });
 })(); 
 
 

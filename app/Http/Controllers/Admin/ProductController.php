@@ -40,6 +40,10 @@ class ProductController extends Controller
         $data = $this->product->get_all_new();
         return $this->product->send_response(201, $data, null);
     }
+    public function get_best_sale(){
+        $data = $this->product->get_best_sale();
+        return $this->product->send_response(201, $data, null);
+    }
 
     public function get_one($id){
         $data = $this->product->get_one($id);

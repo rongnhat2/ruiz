@@ -50,29 +50,30 @@
                             <div class="billing-details-wrap">
                                 <div class="cart-form-data js-validate">
                                     <h3 class="shoping-checkboxt-title">Billing Details</h3>
+                                    <input type="hidden" name="First name" class="data-id" value="<?php echo $customer_data['id']; ?>">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <p class="single-form-row">
                                                 <label>Username <span class="required">*</span></label>
-                                                <input type="text" name="First name" class="data-name">
+                                                <input type="text" name="First name" class="data-name" value="<?php echo $customer_data['name']; ?>">
                                             </p>
                                         </div>
                                         <div class="col-lg-6">
                                             <p class="single-form-row">
                                                 <label>Email <span class="required">*</span></label>
-                                                <input type="text" name="Last name" class="data-email">
+                                                <input type="text" name="Last name" class="data-email" value="<?php echo $customer_data['email']; ?>">
                                             </p>
                                         </div> 
                                         <div class="col-lg-12">
                                             <p class="single-form-row">
                                                 <label>Town / City <span class="required">*</span></label>
-                                                <input type="text" name="address" class="data-address">
+                                                <input type="text" name="address" class="data-address" value="<?php echo $customer_data['address']; ?>">
                                             </p>
                                         </div>
                                         <div class="col-lg-12">
                                             <p class="single-form-row">
                                                 <label>Phone <span class="required">*</span></label>
-                                                <input type="text" name="phone" class="data-phone">
+                                                <input type="text" name="phone" class="data-phone" value="<?php echo $customer_data['phone']; ?>">
                                             </p>
                                         </div>
                                         <div class="col-lg-12">
@@ -103,22 +104,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="cart-list">
-                                                <tr class="cart_item">
-                                                    <td class="product-name">
-                                                        Vestibulum suscipit <strong class="product-quantity"> × 1</strong>
-                                                    </td>
-                                                    <td class="product-total">
-                                                        <span class="amount">£165.00</span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="cart_item">
-                                                    <td class="product-name">
-                                                        Vestibulum magna <strong class="product-quantity"> × 1</strong>
-                                                    </td>
-                                                    <td class="product-total">
-                                                        <span class="amount">£50.00</span>
-                                                    </td>
-                                                </tr>
+                                                
                                             </tbody>
                                             <tfoot>
                                                 <tr class="order-total">

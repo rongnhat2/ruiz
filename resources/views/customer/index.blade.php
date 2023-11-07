@@ -9,7 +9,6 @@
 
 @section('body')
 
-
         <!-- Hero Section Start -->
         <div class="hero-slider hero-slider-one">
 

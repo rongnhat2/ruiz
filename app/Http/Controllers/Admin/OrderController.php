@@ -62,13 +62,13 @@ class OrderController extends Controller
         $order_status   = $request->data_status;
         $message_user   = [
             "",
-            "Cửa hàng đang nhập hàng",
-            "Đã xác nhận đơn hàng",
-            "Đã chuẩn bị hàng - shipper đang lấy hàng", 
-            "Shipper đang vận chuyển",
-            "Đã nhận hàng",
-            "Đơn hàng kết thúc, cảm ơn bạn đã mua hàng",
-            "Đã hủy",
+            "Preparing the product",
+            "Order Confirmed",
+            "The order has been delivered to Shipper", 
+            "Being transported",
+            "Received product",
+            "Order completed",
+            "Cancelled",
         ];
         $order = $this->order->get_one($order_id);
         $order_message_array = explode(",",$order[0]->order_value);

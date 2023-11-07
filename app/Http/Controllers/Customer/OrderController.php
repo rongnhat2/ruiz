@@ -64,88 +64,52 @@ class OrderController extends Controller
         $address    = preg_replace('/(<([^>]+)>)/', '', $request->data_address);
         $phone      = preg_replace('/(<([^>]+)>)/', '', $request->data_phone);
         $description      = preg_replace('/(<([^>]+)>)/', '', $request->data_description);
+        $customer_id   = $request->data_id ? $request->data_id : null;
+        $metadata = json_decode($request->metadata);
+        $total      = 0; 
+        foreach ($metadata as $key => $value) {
+            $data = json_decode($value); 
+            $product = $this->product->get_one($data->id);
+            $total += $product->prices * $data->quantity;
+        }
+        $route_redirect = "/profile?tab=Order";
+        $data_order = [
+            "customer_id"       => $customer_id,
+            "username"          => $name,
+            "email"             => $email,
+            "phone"             => $phone,
+            "address"           => $address,
+            "note"              => $description,
+            "total"             => $total,
+            "payment_value"     => 0,
+            "payment_status"    => 0,
+            "order_value"       => Carbon::now()->toDateTimeString() . "|Order Successful",
+            "order_status"      => 0,
+            "status"            => 1,
+        ];  
+        $order_item = $this->order->create($data_order);
+        
 
+        foreach ($metadata as $key => $value) {
+            $data = json_decode($value); 
+            $product = $this->product->get_one($data->id);
+            $total += $product->prices * $data->quantity;
+            
+            $item_order = [
+                "order_id"      => $order_item->id,
+                "product_id"    => $data->id,
+                "color_id"      => $data->color,
+                "quantity"      => $data->quantity,
+                "prices"        => $product->prices,
+                "total_price"   => $product->prices * $data->quantity,
+                "status"        => 1,
+            ];
+            $this->order_detail->create($item_order);
+        }
         Mail::send('customer/confirm-order', array('data'=> $name), function($message) use ($email) {
             $message->from('admin.ruiz@gmail.com', 'Ruiz - Order email');
             $message->to($email)->subject('Ruiz-order');
         });
-
-        return true;
-        $sub_total  = 0;
-        $discount   = 0;
-        $total      = 0; 
-        foreach ($metadata->cart as $key => $value) { 
-            $sub_total  += $value->meta->data[0]->prices;
-            $discount   += $sub_total / 100 * $value->meta->data[0]->discount;
-            $total      += $value->meta->data[0]->prices - ( $value->meta->data[0]->prices / 100 * $value->meta->data[0]->discount );
-        }
-        $route_redirect = "/profile?tab=Order";
-        try {
-            DB::beginTransaction();
-            $order_key_id = mt_rand(1, 9999999);
-            $data_order = [
-                "customer_id"   => $customer_id ? $customer_id : null,
-                "order_key_id"  => $order_key_id,
-                "sub_total"     => $sub_total,
-                "discount"      => $discount,
-                "total"         => $total,
-                "name"          => $name,
-                "email"         => $email,
-                "phone"         => $phone,
-                "zipcode"       => $zipcode,
-                "address"       => $address,
-                "description"   => $description,
-                "order_value"   => Carbon::now()->toDateTimeString() . "|Đặt hàng thành công",
-                "order_status"  => 0,
-            ]; 
-            $order_item = $this->order->create($data_order);
-            foreach ($metadata->cart as $key => $value) {
-                $product = $this->product->get_one($value->id);
-                $item_order = [
-                    "order_id"      => $order_item->id,
-                    "product_id"    => $value->id,
-                    "size"          => $value->meta->data[0]->size,
-                    "quantity"      => $value->qty,
-                    "prices"        => $value->meta->data[0]->prices,
-                    "discount"      => $value->meta->data[0]->discount,
-                    "total_price"   => ($value->meta->data[0]->prices - ( $value->meta->data[0]->prices / 100 * $value->meta->data[0]->discount ) ) * $value->qty,
-                ];
-                $this->order_detail->create($item_order);
-            }
-
-            $data_customer = null;
-            if ($customer_id) {
-                $data_customer = $this->customer->find_with_id($customer_id);
-            } 
-            $data = [
-                'email'             => $email,
-                'date_created'      => Carbon::now()->toDateTimeString(),
-                'total'             => $total,
-                'order_id'         => "SBTC_".$order_item->id."_".$order_key_id,
-                'description'      => $description,
-                'customer_login'   => $customer_id ? $customer_id : null,
-                'metadata'          => $metadata,
-                'customer_data'    => $data_customer,
-                'order_data_name'    => $name,
-                'order_data_phone'    => $phone,
-                'order_data_email'    => $email,
-                'order_data_zipcode'    => $zipcode,
-                'order_data_address'    => $address,
-                'order_data_description'    => $description,
-            ];
-            Mail::send('customer/confirm-order', array('data'=> $data), function($message) use ($email) {
-                $message->from('admin.ruiz@gmail.com', 'Ruiz - Order email');
-                $message->to($email)->subject('Ruiz-order');
-            });
-            DB::commit(); 
-            if ($customer_id) { 
-                return $this->order->send_response("ご注文いただきありがとうございます！", $route_redirect, 201); 
-            }
-            return $this->order->send_response("ご注文いただきありがとうございます！", $route_redirect, 201); 
-        } catch (\Exception $exception) {
-            dd( $exception);
-            DB::rollBack(); 
-            return $this->order->send_response("Error", $route_redirect, 404);  
-        } 
+        return $this->order->send_response("Order successful", $route_redirect, 200); 
     }
 }

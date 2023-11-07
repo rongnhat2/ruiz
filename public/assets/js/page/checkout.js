@@ -31,6 +31,7 @@ const View = {
             var required_data = [];
             var onPushData = true;
 
+            var data_id      = $(`${resource}`).find('.data-id').val(); 
             var data_name      = $(`${resource}`).find('.data-name').val(); 
             var data_email      = $(`${resource}`).find('.data-email').val(); 
             var data_phone      = $(`${resource}`).find('.data-phone').val(); 
@@ -50,6 +51,7 @@ const View = {
             if (data_name == '') { required_data.push('Name is required.'); onPushData = false } 
             
             if (onPushData) {
+                fd.append('data_id', IndexView.Config.toNoTag(data_id));
                 fd.append('data_name', IndexView.Config.toNoTag(data_name));
                 fd.append('data_email', IndexView.Config.toNoTag(data_email));
                 fd.append('data_phone', IndexView.Config.toNoTag(data_phone));
@@ -69,6 +71,7 @@ const View = {
         onPush(callback){
             $(document).on('click', `.button-payment`, function() {
                 var data = View.Order.getVal();
+                $(this).val("Creating Order ....")
                 if (data) callback(data);
             });
         },
@@ -86,6 +89,17 @@ const View = {
         initData();
     }
 
+    async function redirect_logined(url) {
+        await delay(1500);
+        window.location.replace(url);
+    }
+    function delay(delayInms) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve(2);
+            }, delayInms);
+        });
+    }
     async function initData() { 
         await getColor();
         var card_data = localStorage.getItem("ruiz-cart")
@@ -107,17 +121,15 @@ const View = {
     View.Order.onPush((fd) => {
         Api.Order.Checkout(fd)
             .done(res => {
-                // if (res.status == 200) {
-                //     View.response.success(res.message)
-                //     localStorage.removeItem("ruiz-cart"); 
-                //     redirect_logined(res.data)
-                // }else if (res.status == 201) {
-                //     View.response.success(res.message)
-                //     localStorage.removeItem("ruiz-cart");  
-                //     redirect_logined("/")
-                // }else{
-                //     View.response.error(res.message)
-                // }
+                if (res.status == 200) {
+                    localStorage.removeItem("ruiz-cart"); 
+                    redirect_logined(res.data)
+                }else if (res.status == 201) {
+                    localStorage.removeItem("ruiz-cart");  
+                    redirect_logined("/order-success")
+                }else{
+                    View.response.error(res.message)
+                }
             })
             .fail(err => {  })
             .always(() => { });

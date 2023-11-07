@@ -65,6 +65,10 @@ class DisplayController extends Controller
         $customer_data = static::generate_logined($request);    
         return view("customer.profile", compact("customer_data"));
     }
+    public function contact(Request $request){
+        $customer_data = static::generate_logined($request);    
+        return view("customer.contact", compact("customer_data"));
+    }
 
     
 

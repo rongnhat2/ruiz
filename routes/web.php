@@ -19,6 +19,7 @@ Route::get('category', 'Customer\DisplayController@category')->name('customer.vi
 Route::get('about', 'Customer\DisplayController@about')->name('customer.view.about'); 
 Route::get('cart', 'Customer\DisplayController@cart')->name('customer.view.cart'); 
 Route::get('checkout', 'Customer\DisplayController@checkout')->name('customer.view.checkout'); 
+Route::get('contact-us', 'Customer\DisplayController@contact')->name('customer.view.contact'); 
 Route::get('order-success', 'Customer\DisplayController@order_success')->name('customer.view.success'); 
 
 

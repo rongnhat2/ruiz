@@ -18,14 +18,14 @@ class CustomerRepository extends BaseRepository implements RepositoryInterface
 
     // Lấy ra tất cả user
     public function getAll(){
-        return DB::table('customer') 
+        return DB::table('customer_auth') 
                     ->select('customer_detail.username', 'customer_detail.id')
                     ->leftjoin("customer_detail", "customer.id", "=", "customer_detail.customer_id") 
                     ->get(); 
     }
     // Lấy ra 1 user
     public function getOne($id){
-        return DB::table('customer') 
+        return DB::table('customer_auth') 
                     ->select('customer_detail.username', 'customer_detail.id')
                     ->leftjoin("customer_detail", "customer.id", "=", "customer_detail.customer_id") 
                     ->where([["customer.id", "=", $id]])
@@ -67,7 +67,7 @@ class CustomerRepository extends BaseRepository implements RepositoryInterface
     // Lấy ra secret_key
     public function get_secret($id){
          $sql = "SELECT secret_key
-                    FROM customer
+                    FROM customer_auth
                     WHERE id = ".$id;
         return DB::select($sql);
     } 

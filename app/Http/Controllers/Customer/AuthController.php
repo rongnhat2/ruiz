@@ -172,7 +172,7 @@ class AuthController extends Controller
                 return $this->customer->send_response("Mật khẩu cũ không đúng", null, 500); 
             }
         }else{
-            return $this->customer->send_response("Phiên đăng nhập hết hạn", $route_redirect, 500); 
+            return $this->customer->send_response("Phiên đăng nhập hết hạn", '/', 500); 
         }
     }
 

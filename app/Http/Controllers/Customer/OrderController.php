@@ -15,6 +15,9 @@ use App\Models\OrderDetail;
 use App\Repositories\Manager\ProductRepository;
 use App\Models\Product;
 
+use App\Repositories\CustomerRepository;
+use App\Models\CustomerAuth;
+
 use Carbon\Carbon;
 use Session;
 use Hash;
@@ -26,8 +29,10 @@ class OrderController extends Controller
     protected $product;
     protected $order;
     protected $order_detail;
+    protected $customer;
 
-    public function __construct(Product $product, OrderList $order, OrderDetail $order_detail){
+    public function __construct(Product $product, CustomerAuth $customer, OrderList $order, OrderDetail $order_detail){
+        $this->customer         = new CustomerRepository($customer);
         $this->order            = new OrderRepository($order);
         $this->order_detail     = new OrderRepository($order_detail); 
         $this->product          = new ProductRepository($product);
@@ -38,10 +43,10 @@ class OrderController extends Controller
         $is_user = static::check_token($request); 
         $route_redirect = "/";
         if ($is_user) { 
-            $tab = $request->tab;
+            
             list($user_id, $token) = static::unpack_token($request); 
             $data   = [];
-            $order = $this->order->get_all($tab, $user_id);
+            $order = $this->order->customer_get_all($user_id);
             foreach ($order as $key => $value) {
                 $order_detail = $this->order->get_detail($value->id);
                 $order_group = [
@@ -111,5 +116,27 @@ class OrderController extends Controller
             $message->to($email)->subject('Ruiz-order');
         });
         return $this->order->send_response("Order successful", $route_redirect, 200); 
+    }
+    // Kiểm tra token hợp lệ
+    public function check_token(Request $request){
+        $token = $request->cookie('_token_');
+        if ($token) {
+            list($user_id, $token) = explode('$', $token, 2); 
+            $user = $this->customer->get_secret($user_id); 
+            if ($user) {
+                return Hash::check($user_id . '$' . $user[0]->secret_key, $token);
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+        
+    }
+
+    // Tách token
+    public function unpack_token(Request $request){
+        $token = $request->cookie('_token_');
+        return explode('$', $token, 2); 
     }
 }

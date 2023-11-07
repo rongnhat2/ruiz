@@ -132,13 +132,9 @@ const Api = {
         contentType: false,
         processData: false,
     });
-    Api.Order.GetOrder = (tab) => $.ajax({
+    Api.Order.GetOrder = () => $.ajax({
         url: `/customer/apip/order/get`,
         method: 'GET',
-        dataType: 'json',
-        data: {
-            tab: tab ?? null,
-        }
     });
 })();
 

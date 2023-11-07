@@ -43,5 +43,51 @@ class OrderRepository extends BaseRepository implements RepositoryInterface
                 ->leftjoin("color", "product_color.color_id", "=", "color.id")
                 ->get(); 
     }
+    public function customer_get_all($id){
+        $sql = " SELECT *
+                FROM order_list
+                WHERE customer_id = ".$id;
+        return DB::select($sql);
+    }
+    
+    public function get_full_order($id){
+        $sql = " SELECT order_detail.*, 
+                        product.name, 
+                        product.id as product_id,
+                        warehouse.quantity as warehouse_quatity
+                FROM order_detail
+                LEFT JOIN product
+                ON product.id = order_detail.product_id
+                LEFT JOIN warehouse
+                ON product.id = warehouse.product_id
+                WHERE order_id = ".$id;
+        return DB::select($sql);
+    }
+    public function get_in_order($id){
+        $sql = " SELECT *
+                    FROM order_time
+                    WHERE id = ".$id;
+        return DB::select($sql);
+    }
+    public function update_status($id){
+        $sql = "UPDATE order_detail
+                SET suborder_status = 1
+                WHERE order_id = ".$id;
+        return DB::select($sql);
+    }
+
+    
+    public function get_detail($id){
+        $sql = "SELECT order_detail.*,
+                        product.name,
+                        product.images ,
+                        product.prices as product_prices
+                    FROM order_detail 
+                    LEFT JOIN product
+                    ON product.id = order_detail.product_id
+                    WHERE order_detail.order_id = ".$id;
+        return DB::select($sql);
+    }
+    
  
 }

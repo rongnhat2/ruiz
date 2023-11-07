@@ -49,7 +49,7 @@ class OrderRepository extends BaseRepository implements RepositoryInterface
     public function get_turnover(){
         $sql = " SELECT sum(total) as total
                     FROM order_list
-                    WHERE order_status = 5";
+                    WHERE order_status = 5 OR 6";
         return DB::select($sql);
     }
     public function get_item_sell(){
@@ -57,19 +57,19 @@ class OrderRepository extends BaseRepository implements RepositoryInterface
                     FROM order_list
                     LEFT JOIN order_detail
                     ON order_list.id = order_detail.order_id
-                    WHERE order_status = 5";
+                    WHERE order_status = 5 OR 6";
         return DB::select($sql);
     }
     public function get_order_time(){
         $sql = " SELECT count(*) as total
                     FROM order_list
-                    WHERE order_status = 5";
+                    WHERE order_status = 5 OR 6";
         return DB::select($sql);
     }
     public function get_customer_buy(){
         $sql = " SELECT count(customer_id) as total
                     FROM order_list
-                    WHERE order_status = 5
+                    WHERE order_status = 5 OR 6
                     GROUP BY customer_id";
         return DB::select($sql);
     }
@@ -86,7 +86,7 @@ class OrderRepository extends BaseRepository implements RepositoryInterface
                     ON warehouse.product_id = order_detail.product_id
                     LEFT JOIN product
                     ON order_detail.product_id = product.id
-                    WHERE order_status = 3
+                    WHERE order_status <> 7 
                     GROUP BY order_detail.product_id, 
                             warehouse.quantity,
                             product.name,
@@ -145,6 +145,9 @@ class OrderRepository extends BaseRepository implements RepositoryInterface
                     WHERE order_detail.order_id = ".$id;
         return DB::select($sql);
     }
+    public function get_customer_new(){
+        return true;
+    }
     
- 
+    
 }

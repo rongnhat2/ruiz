@@ -160,12 +160,8 @@ class OrderController extends Controller
     }
     public function get_customer(){
         $customer_new = $this->order->get_customer_new();
-        $customer_free = $this->order->get_customer_free();
-        $data = [
-            "customer_new"  => $customer_new,
-            "customer_free"  => $customer_free,
-        ];
-        return $data;
+        
+        return $customer_new;
     }
 
 }

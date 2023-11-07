@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Manager\ProductRepository; 
 use App\Models\Product;
+use App\Repositories\Manager\BlogRepository;
+use App\Models\Blog;  
 use Session;
 use Hash;
 use DB;  
@@ -13,9 +15,11 @@ use DB;
 class DisplayController extends Controller
 {
     protected $product; 
+    protected $blog; 
 
-    public function __construct(Product $product ){
-        $this->product             = new ProductRepository($product);  
+    public function __construct(Product $product, Blog $blog ){
+        $this->product    = new ProductRepository($product); 
+        $this->blog       = new BlogRepository($blog);  
     }
 
     public function index(Request $request){
@@ -68,6 +72,15 @@ class DisplayController extends Controller
     public function contact(Request $request){
         $customer_data = static::generate_logined($request);    
         return view("customer.contact", compact("customer_data"));
+    }
+    public function blog(Request $request){
+        $customer_data = static::generate_logined($request);    
+        return view("customer.blog", compact("customer_data"));
+    }
+    public function blog_detail(Request $request, $slug){
+        $customer_data = static::generate_logined($request);    
+        $data = $this->blog->get_one($slug); 
+        return view("customer.blog-detail", compact("customer_data", "data"));
     }
 
     

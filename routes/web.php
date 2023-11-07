@@ -19,6 +19,8 @@ Route::get('category', 'Customer\DisplayController@category')->name('customer.vi
 Route::get('about', 'Customer\DisplayController@about')->name('customer.view.about'); 
 Route::get('cart', 'Customer\DisplayController@cart')->name('customer.view.cart'); 
 Route::get('checkout', 'Customer\DisplayController@checkout')->name('customer.view.checkout'); 
+Route::get('blog', 'Customer\DisplayController@blog')->name('customer.view.blog'); 
+Route::get('blog-detail/{slug}', 'Customer\DisplayController@blog_detail')->name('customer.view.blog_detail'); 
 Route::get('contact-us', 'Customer\DisplayController@contact')->name('customer.view.contact'); 
 Route::get('order-success', 'Customer\DisplayController@order_success')->name('customer.view.success'); 
 
@@ -46,6 +48,9 @@ Route::prefix('customer')->group(function () {
             Route::post('change', 'Customer\AuthController@change')->name('customer.auth.change');
             Route::post('update', 'Customer\AuthController@update')->name('customer.auth.update');
             Route::get('get-profile', 'Customer\AuthController@get_profile')->name('customer.auth.profile');
+        }); 
+        Route::prefix('blog')->group(function () {
+            Route::get('get', 'Admin\BlogController@get')->name('customer.category.get');
         }); 
 
 
@@ -108,22 +113,20 @@ Route::middleware(['AuthAdmin:admin'])->group(function () {
         Route::prefix('product')->group(function () {
             Route::get('/', 'Admin\ProductController@index')->name('admin.product.index'); 
         });
-        Route::prefix('watermark')->group(function () {
-            Route::get('/', 'Admin\DisplayController@watermark')->name('admin.watermark.index');
-        });
-        
         Route::prefix('order')->group(function () {
             Route::get('/', 'Admin\OrderController@index')->name('admin.order.index');
         });
-
-        Route::prefix('category')->group(function () {
-            Route::get('/', 'Admin\CategoryController@index')->name('admin.category.index');
-        });
-        Route::prefix('discount')->group(function () {
-            Route::get('/', 'Admin\DiscountController@index')->name('admin.discount.index');
+        Route::prefix('blog')->group(function () {
+            Route::get('/', 'Admin\BlogController@index')->name('admin.blog.index');
         });
         Route::prefix('warehouse')->group(function () {
             Route::get('/', 'Admin\WarehouseController@index')->name('admin.warehouse.index');
+        });
+
+
+
+        Route::prefix('discount')->group(function () {
+            Route::get('/', 'Admin\DiscountController@index')->name('admin.discount.index');
         });
         Route::prefix('customer')->group(function () {
             Route::get('/', 'Admin\CustomerController@index')->name('admin.customer.index');
@@ -184,6 +187,13 @@ Route::prefix('apip')->group(function () {
         Route::get('/get-one/{id}', 'Admin\BrandController@get_one')->name('admin.brand.get_one');
         Route::post('/update', 'Admin\BrandController@update')->name('admin.brand.update');
         Route::get('/delete/{id}', 'Admin\BrandController@delete')->name('admin.brand.delete');
+    });
+    Route::prefix('blog')->group(function () {
+        Route::get('/get', 'Admin\BlogController@get')->name('admin.brand.get');
+        Route::post('/store', 'Admin\BlogController@store')->name('admin.brand.store');
+        Route::get('/get-one/{id}', 'Admin\BlogController@get_one')->name('admin.brand.get_one');
+        Route::post('/update', 'Admin\BlogController@update')->name('admin.brand.update');
+        Route::get('/delete/{id}', 'Admin\BlogController@delete')->name('admin.brand.delete');
     });
     Route::prefix('product')->group(function () {
         Route::get('get-all-new', 'Admin\ProductController@get_all_new')->name('admin.product.get_all_new');

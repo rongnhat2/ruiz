@@ -41,6 +41,14 @@
                     <span class="title">Warehouse</span>
                 </a>
             </li>
+            <li class="nav-item dropdown blog-group">
+                <a class="dropdown-toggle blog" href="{{ route('admin.blog.index') }}">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-appstore"></i>
+                    </span>
+                    <span class="title">Blog</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

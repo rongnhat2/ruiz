@@ -4,6 +4,7 @@ const Api = {
     Brand: {},  
     Product: {},  
     Order: {},
+    Blog: {},
 
 
 
@@ -93,6 +94,14 @@ const Api = {
 (() => {
     Api.Brand.GetAll = () => $.ajax({
         url: `/customer/apip/brand/get`,
+        method: 'GET',
+    }); 
+})(); 
+ 
+//Brand
+(() => {
+    Api.Blog.GetAll = () => $.ajax({
+        url: `/customer/apip/blog/get`,
         method: 'GET',
     }); 
 })(); 

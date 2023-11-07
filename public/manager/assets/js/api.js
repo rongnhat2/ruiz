@@ -5,6 +5,7 @@ const Api = {
     Order: {},
     Warehouse: {},
     Statistic: {},
+    Blog: {},
 
 
 
@@ -81,6 +82,36 @@ const Api = {
     });
     Api.Brand.Delete = (id) => $.ajax({
         url: `/apip/brand/delete/${id}`,
+        method: 'GET',
+    });
+})(); 
+ 
+//Blog
+(() => {
+    Api.Blog.GetAll = () => $.ajax({
+        url: `/apip/blog/get`,
+        method: 'GET',
+    }); 
+    Api.Blog.Store = (data) => $.ajax({
+        url: `/apip/blog/store`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
+    Api.Blog.getOne = (id) => $.ajax({
+        url: `/apip/blog/get-one/${id}`,
+        method: 'GET',
+    });
+    Api.Blog.Update = (data) => $.ajax({
+        url: `/apip/blog/update`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
+    Api.Blog.Delete = (id) => $.ajax({
+        url: `/apip/blog/delete/${id}`,
         method: 'GET',
     });
 })(); 

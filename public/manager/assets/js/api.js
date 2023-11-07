@@ -2,6 +2,9 @@ const Api = {
     Color: {},  
     Brand: {},  
     Product: {},  
+    Order: {},
+    Warehouse: {},
+    Statistic: {},
 
 
 
@@ -173,6 +176,73 @@ const Api = {
     });
 })(); 
 
+
+//Order
+(() => {
+    Api.Order.GetAll = (id) => $.ajax({
+        url: `/apip/order/get`,
+        method: 'GET',
+        dataType: 'json',
+        data: {
+            id: id ?? '',
+        }
+    });
+    Api.Order.GetOne = (id) => $.ajax({
+        url: `/apip/order/get-one`,
+        method: 'GET',
+        dataType: 'json',
+        data: {
+            id: id ?? '',
+        }
+    });
+    Api.Order.Update = (data) => $.ajax({
+        url: `/apip/order/update`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
+})();
+
+
+// Warehouse
+(() => {
+    Api.Warehouse.GetDataItem = () => $.ajax({
+        url: `/apip/warehouse/get-item`,
+        method: 'GET',
+    });
+    Api.Warehouse.GetDataHistory = () => $.ajax({
+        url: `/apip/warehouse/get-history`,
+        method: 'GET',
+    }); 
+    Api.Warehouse.Store = (data) => $.ajax({
+        url: `/apip/warehouse/store`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
+    Api.Warehouse.getOne = (id) => $.ajax({
+        url: `/apip/warehouse/get-ware-one/${id}`,
+        method: 'GET',
+    });
+})();
+
+// Statistic
+(() => {
+    Api.Statistic.getTotal = () => $.ajax({
+        url: `/apip/statistic/get-total`,
+        method: 'GET',
+    });
+    Api.Statistic.getBestSale = () => $.ajax({
+        url: `/apip/statistic/get-best-sale`,
+        method: 'GET',
+    });
+    Api.Statistic.getCustomerBuy = () => $.ajax({
+        url: `/apip/statistic/get-customer`,
+        method: 'GET',
+    });
+})();
 
 // Image
 (() => {

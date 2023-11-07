@@ -19,8 +19,7 @@ class WarehouseRepository extends BaseRepository implements RepositoryInterface
     public function get_item_all(){
         $sql = "SELECT warehouse.*, 
                     product.name, 
-                    product.prices, 
-                    product.defaul_prices 
+                    product.prices
                 FROM warehouse
                 LEFT JOIN product
                 ON product.id = warehouse.product_id;";
@@ -29,19 +28,19 @@ class WarehouseRepository extends BaseRepository implements RepositoryInterface
     public function get_history_all(){
         $sql_getall =   "SELECT warehouse_history.id, 
                                 warehouse_history.history_status, 
-                                admin_auth.email, 
+                                admin.email, 
                                 sum(quantity) as quantities, 
                                 sum(prices) as prices, 
                                 warehouse_history.created_at
                             FROM warehouse_history_detail
                             LEFT JOIN warehouse_history
                             ON warehouse_history.id = warehouse_history_detail.warehouse_history_id
-                            LEFT JOIN admin_auth
-                            ON admin_auth.id = warehouse_history.admin_id
+                            LEFT JOIN admin
+                            ON admin.id = warehouse_history.admin_id
                             GROUP BY warehouse_history_detail.warehouse_history_id, 
                                     warehouse_history.id, 
                                     warehouse_history.history_status, 
-                                    admin_auth.email, 
+                                    admin.email, 
                                     warehouse_history.created_at
                             ORDER BY warehouse_history.created_at DESC";
         return DB::select($sql_getall);

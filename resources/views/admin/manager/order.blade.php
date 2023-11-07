@@ -30,37 +30,55 @@
         <div class="card">
             <div class="card-body">
                 <div class="status-list">
-                    <div class="status-event" atr="All" data-id="">
+                <div class="status-event" atr="All" data-id="">
                         <div class="d-flex align-items-center">
                             <div class="badge badge-primary badge-dot m-r-10"></div>
                             <div>Tất cả đơn hàng</div>
                         </div>
                     </div>
-                    <div class="status-event is-select" atr="Pending" data-id="">
+                    <div class="status-event is-select" atr="Pending" data-id="0">
                         <div class="d-flex align-items-center">
                             <div class="badge badge-warning badge-dot m-r-10"></div>
                             <div>Chờ xử lí</div>
                         </div>
                     </div>
-                    <div class="status-event" atr="Unfulfilled" data-id="">
+                    <div class="status-event" atr="Unfulfilled" data-id="1">
                         <div class="d-flex align-items-center">
                             <div class="badge badge-secondary badge-dot m-r-10"></div>
                             <div>Chưa hoàn thiện</div>
                         </div>
                     </div>
-                    <div class="status-event" atr="Fulfilled" data-id="">
+                    <div class="status-event" atr="Fulfilled" data-id="2">
                         <div class="d-flex align-items-center">
                             <div class="badge badge-info badge-dot m-r-10"></div>
                             <div>Đã hoàn thiện</div>
                         </div>
                     </div>
-                    <div class="status-event" atr="Shipped" data-id="">
+                    <div class="status-event" atr="Shipped" data-id="3">
                         <div class="d-flex align-items-center">
-                            <div class="badge badge-success badge-dot m-r-10"></div>
+                            <div class="badge badge-purple badge-dot m-r-10"></div>
+                            <div>Chờ giao hàng</div>
+                        </div>
+                    </div>
+                    <div class="status-event" atr="Shipped" data-id="4">
+                        <div class="d-flex align-items-center">
+                            <div class="badge badge-cyan badge-dot m-r-10"></div>
+                            <div>Đang giao hàng</div>
+                        </div>
+                    </div>
+                    <div class="status-event" atr="Shipped" data-id="5">
+                        <div class="d-flex align-items-center">
+                            <div class="badge badge-geekblue badge-dot m-r-10"></div>
                             <div>Đã giao hàng</div>
                         </div>
                     </div>
-                    <div class="status-event" atr="Refund" data-id="">
+                    <div class="status-event" atr="Shipped" data-id="6">
+                        <div class="d-flex align-items-center">
+                            <div class="badge badge-success badge-dot m-r-10"></div>
+                            <div>Kêt thúc</div>
+                        </div>
+                    </div>
+                    <div class="status-event" atr="Refund" data-id="7">
                         <div class="d-flex align-items-center">
                             <div class="badge badge-danger badge-dot m-r-10"></div>
                             <div>Hoàn trả</div>

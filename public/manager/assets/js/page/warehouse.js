@@ -5,10 +5,9 @@ const View = {
             return [
                 data.product_id,
                 data.name,
-                IndexView.table.formatNumber(data.quantity),
-                IndexView.table.formatNumber(data.reserve),
-                IndexView.table.formatNumber(data.prices) + ` đ`,
-                IndexView.table.formatNumber(data.defaul_prices) + ` đ`,
+                data.quantity,
+                data.reserve,
+                data.prices + ` $`,
             ]
         },
         init(){
@@ -38,12 +37,7 @@ const View = {
                         title: 'Giá bán lẻ',
                         name: 'name',
                         orderable: true,
-                    },
-                    {
-                        title: 'Giá bán sỉ',
-                        name: 'name',
-                        orderable: true,
-                    },
+                    }, 
                 ];
             IndexView.table.init("#data-table", row_table);
         }
@@ -58,7 +52,7 @@ const View = {
             return [
                 data.history.id,
                 data.history.email,
-                IndexView.table.formatNumber(total_price) + ` đ`,
+                IndexView.table.formatNumber(total_price) + ` $`,
                 data.history.created_at,
                 `<span class="badge badge-pill badge-${data.history.history_status == 1 ? "green" : "red"} m-r-5 m-b-5">${data.history.history_status == 1 ? "Nhập kho" : "Xuất kho"}</span>`,
                 `<div class="view-data modal-fs-control" style="cursor: pointer" atr="View" data-id="${data.history.id}"><i class="anticon anticon-eye"></i></div>`
@@ -264,8 +258,8 @@ const View = {
                         .append(`<tr>
                             <td>${v.name}</td>
                             <td>${IndexView.table.formatNumber(v.quantity)}</td>
-                            <td>${IndexView.table.formatNumber(v.prices)} đ</td>
-                            <td>${IndexView.table.formatNumber(v.quantity * v.prices)} đ</td>
+                            <td>${IndexView.table.formatNumber(v.prices)} $</td>
+                            <td>${IndexView.table.formatNumber(v.quantity * v.prices)} $</td>
                           </tr>`)
                 })
             },

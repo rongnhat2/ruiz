@@ -107,6 +107,18 @@ class OrderController extends Controller
         }else if ($request->data_status == 6) {
             // Kết thúc đơn hàng
             $this->order->update(["order_status" => $request->data_status], $request->data_id);
+            $data_sub = $this->order_detail->get_full_order($request->data_id);
+            foreach ($data_sub as $key => $value) {
+                $warehouse_item = $this->warehouse->warehouse_get_item($value->product_id);
+                $warehouse_quantity = $warehouse_item[0]->quantity;
+                $warehouse_reserve  = $warehouse_item[0]->reserve;
+                $item_reserve       = $value->quantity;
+                if (count($warehouse_item) > 0 && $warehouse_item[0]->quantity > $value->quantity) {
+                    $this->warehouse->update_item($value->product_id, $warehouse_quantity, $warehouse_reserve -= $item_reserve);
+                }else{
+                    return $this->order->send_response(500, null, null);
+                }
+            }
         }else if ($request->data_status == 7) { 
             $data_sub = $this->order_detail->get_full_order($request->data_id);
             foreach ($data_sub as $key => $value) {

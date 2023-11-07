@@ -39,17 +39,10 @@ const View = {
                 `<p><i class="far fa-user m-r-10"></i>${data.username}</p>
                 <p><i class="far fa-envelope m-r-10"></i>${data.email}</p>
                 <p><i class="fas fa-phone-alt m-r-10"></i>${data.telephone}</p>`,
-                `<div class="d-flex align-items-center">
-                    <div class="badge badge-primary badge-dot m-r-10"></div>
-                    <div>Đơn giá: ${IndexView.table.formatNumber(data.sub_total)} đ</div>
-                </div> 
-                <div class="d-flex align-items-center">
-                    <div class="badge badge-secondary badge-dot m-r-10"></div>
-                    <div>Giảm giá: ${IndexView.table.formatNumber(data.discount_total)} đ </div>
-                </div>
+                `
                 <div class="d-flex align-items-center">
                     <div class="badge badge-success badge-dot m-r-10"></div>
-                    <div>Thực tính: ${IndexView.table.formatNumber(data.total)} đ</div>
+                    <div>Thực tính: $ ${data.total}</div>
                 </div>`,
                 data.created_at,
                 `<span class="badge m-b-5 ${order_status[data.order_status]}">${order_status_title[data.order_status]}</span>
@@ -202,10 +195,8 @@ const View = {
                                     <td>${v.name}</td>
                                     <td>${v.quantity}</td>
                                     <td>${v.prices}</td>
-                                    <td>${v.discount} %</td>
                                     <td>${v.total_price}</td>
                                     <td>${warehouse_value}</td>
-                                    <td>${v.shipping_quantity} / ${v.quantity}</td>
                                 </tr>`)
                 })
 
@@ -285,22 +276,22 @@ const View = {
         getData(id)
         localStorage.setItem("item_tab", id);
     })
-    // View.TabData.onChange("Unfulfilled", () => {
-    //     getData(1)
-    //     localStorage.setItem("item_tab", 1);
-    // })
-    // View.TabData.onChange("Fulfilled", () => {
-    //     getData(2)
-    //     localStorage.setItem("item_tab", 2);
-    // })
-    // View.TabData.onChange("Shipped", () => {
-    //     getData(3)
-    //     localStorage.setItem("item_tab", 3);
-    // })
-    // View.TabData.onChange("Refund", () => {
-    //     getData(4)
-    //     localStorage.setItem("item_tab", 4);
-    // })
+    View.TabData.onChange("Unfulfilled", () => {
+        getData(1)
+        localStorage.setItem("item_tab", 1);
+    })
+    View.TabData.onChange("Fulfilled", () => {
+        getData(2)
+        localStorage.setItem("item_tab", 2);
+    })
+    View.TabData.onChange("Shipped", () => {
+        getData(3)
+        localStorage.setItem("item_tab", 3);
+    })
+    View.TabData.onChange("Refund", () => {
+        getData(4)
+        localStorage.setItem("item_tab", 4);
+    })
 
     function init(){
         getData(0);

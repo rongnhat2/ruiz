@@ -125,8 +125,6 @@ Route::middleware(['AuthAdmin:admin'])->group(function () {
             Route::get('/', 'Admin\OrderController@index')->name('admin.order.index');
         });
 
-
-
         Route::prefix('category')->group(function () {
             Route::get('/', 'Admin\CategoryController@index')->name('admin.category.index');
         });
@@ -143,6 +141,32 @@ Route::middleware(['AuthAdmin:admin'])->group(function () {
             Route::get('/', 'Admin\ManagerController@index')->name('admin.manager.index');
         });
     });
+    
+
+    Route::prefix('apip')->group(function () {
+        Route::prefix('order')->group(function () {
+            Route::get('get', 'Admin\OrderController@get')->name('admin.order.get');
+            Route::get('get-one', 'Admin\OrderController@get_one')->name('admin.order.get_one');
+            Route::post('/update', 'Admin\OrderController@update')->name('admin.order.update');
+        });
+
+
+        Route::prefix('warehouse')->group(function () {
+            Route::get('get-item', 'Admin\WarehouseController@get_item')->name('admin.warehouse.item.get');
+            Route::get('get-history', 'Admin\WarehouseController@get_history')->name('admin.warehouse.history.get');
+            Route::get('get-order-fullfil', 'Admin\WarehouseController@get_order_fullfil')->name('admin.warehouse.item.get');
+            Route::get('get-order-export', 'Admin\WarehouseController@get_order_export')->name('admin.warehouse.item.get');
+            Route::get('get-order-shipping', 'Admin\WarehouseController@get_order_shipping')->name('admin.warehouse.item.get');
+
+            Route::post('store', 'Admin\WarehouseController@store')->name('admin.warehouse.store');
+            Route::get('/get-ware-one/{id}', 'Admin\WarehouseController@get_ware_one')->name('admin.warehouse.get_ware_one');
+
+            Route::get('/get-one/{id}', 'Admin\ProductController@get_one')->name('admin.warehouse.get_one');
+            Route::post('/update', 'Admin\ProductController@update')->name('admin.warehouse.update');
+        });
+
+    });
+
 });
 
 
@@ -172,19 +196,4 @@ Route::prefix('apip')->group(function () {
         Route::post('/update', 'Admin\ProductController@update')->name('admin.product.update');
         Route::get('/delete/{id}', 'Admin\ProductController@delete')->name('admin.product.delete');
     });
-
-    Route::prefix('warehouse')->group(function () {
-        Route::get('get-item', 'Admin\WarehouseController@get_item')->name('admin.warehouse.item.get');
-        Route::get('get-history', 'Admin\WarehouseController@get_history')->name('admin.warehouse.history.get');
-        Route::get('get-order-fullfil', 'Admin\WarehouseController@get_order_fullfil')->name('admin.warehouse.item.get');
-        Route::get('get-order-export', 'Admin\WarehouseController@get_order_export')->name('admin.warehouse.item.get');
-        Route::get('get-order-shipping', 'Admin\WarehouseController@get_order_shipping')->name('admin.warehouse.item.get');
-
-        Route::post('store', 'Admin\WarehouseController@store')->name('admin.warehouse.store');
-        Route::get('/get-ware-one/{id}', 'Admin\WarehouseController@get_ware_one')->name('admin.warehouse.get_ware_one');
-
-        Route::get('/get-one/{id}', 'Admin\ProductController@get_one')->name('admin.warehouse.get_one');
-        Route::post('/update', 'Admin\ProductController@update')->name('admin.warehouse.update');
-    });
-
 });

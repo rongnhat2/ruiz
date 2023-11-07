@@ -115,6 +115,13 @@ const Api = {
         url: `/customer/apip/product/get-best-sale`,
         method: 'GET',
     });
+    Api.Product.GetSearch = (data) => $.ajax({
+        url: `/customer/apip/product/get-search`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
 })(); 
 
 

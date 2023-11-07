@@ -291,12 +291,12 @@ const IndexView = {
                 res.data.map(v => {
                     $(".suggess-wrapper").append(`
                             <div class="suggess-item">
-                                <a title="${v.name}" href="/product/${ v.id }-${v.slug }">${v.name}</a>
+                                <a title="${v.name}" href="/product/${v.slug }">${v.name}</a>
                                 <p>${highlight(text, v.name)}</p>
                             </div>`)
                 })
             }else{
-                $(".suggess-wrapper").append(`<div class="suggess-item">検索結果がありません</div>`)
+                $(".suggess-wrapper").append(`<div class="suggess-item">No item</div>`)
             }
         })
     })

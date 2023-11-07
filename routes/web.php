@@ -69,20 +69,8 @@ Route::prefix('customer')->group(function () {
             Route::get('get-all-new', 'Admin\ProductController@get_all_new')->name('admin.product.get_all_new');
             Route::get('get-best-sale', 'Admin\ProductController@get_best_sale')->name('admin.product.get_best_sale');
             Route::get('get-one/{id}', 'Admin\ProductController@get_one')->name('admin.product.get_one');
-
-            Route::get('get-all', 'Customer\ProductController@get_all')->name('customer.product.get.all');
-            Route::get('get-trending', 'Customer\ProductController@get_trending')->name('customer.product.get.trending');
-            Route::get('get-new-arrivals', 'Customer\ProductController@get_new_arrivals')->name('customer.product.get.new_arrivals');
-            Route::get('get-top-view', 'Customer\ProductController@get_top_view')->name('customer.product.get.top_view');
-
-
-            Route::get('get-discount', 'Customer\ProductController@get_discount')->name('customer.product.get.discount');
-            Route::get('get-item-category/{id}', 'Customer\ProductController@get_item_category')->name('customer.product.get.item_category');
-
-            Route::post('get-search', 'Customer\ProductController@get_search')->name('customer.product.get.search');
-            Route::get('get-one-cart/{id}', 'Customer\ProductController@get_one_cart')->name('customer.product.get.cart');
-            Route::get('get-recently/{item}', 'Customer\ProductController@get_recently')->name('customer.product.get.recently');
-            Route::get('get-related/{id}', 'Customer\ProductController@get_related')->name('customer.product.get.related');
+            Route::post('get-search', 'Admin\ProductController@get_search')->name('customer.product.get.search');
+            
         });
         Route::prefix('cart')->group(function () {
             Route::get('get-cart', 'Customer\CartController@get')->name('customer.cart.get');

@@ -50,6 +50,15 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
                     ORDER BY total DESC LIMIT 5";
         return DB::select($sql);
     }
+
+    public function find_real_time($slug, $category){
+        $where_category = $category == 0 ? "" : " AND category_id = ".$category;
+        $sql = "SELECT *
+                FROM product 
+                WHERE slug like '%".$slug."%'".$where_category."
+                LIMIT 5";
+        return DB::select($sql);
+    }
     public function get_one($id){
         return DB::table('product')
                 ->where("product.id", "=", $id)

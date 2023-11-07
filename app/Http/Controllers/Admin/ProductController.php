@@ -44,6 +44,13 @@ class ProductController extends Controller
         $data = $this->product->get_best_sale();
         return $this->product->send_response(201, $data, null);
     }
+    public function get_search(Request $request){
+        $text = $request->data_text;
+        $category = $request->data_category;
+        $slug_data = $this->product->to_slug($text);
+        $data = $this->product->find_real_time($slug_data, $category);
+        return $this->product->send_response(200, $data, null);
+    }
 
     public function get_one($id){
         $data = $this->product->get_one($id);

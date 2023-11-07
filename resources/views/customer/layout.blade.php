@@ -82,20 +82,18 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="search-box-wrapper">
-                                <div class="search-box-inner-wrap">
+                            <div class="search-box-wrapper searchProduct">
+                                <div class="search-box-inner-wrap suggest-list">
                                     <form class="search-box-inner">
                                         <div class="search-select-box">
                                             <select class="nice-select">
-                                                <optgroup label=" Watch">
-                                                    <option value="volvo">All</option>
-                                                    <option value="saab">Mans</option>
-                                                    <option value="saab">Womans</option>
+                                                <optgroup label=" Watch" class="data_category">
+                                                    <option value="0">All</option>
                                                 </optgroup> 
                                             </select>
                                         </div>
                                         <div class="search-field-wrap">
-                                            <input type="text" class="search-field" placeholder="Search product...">
+                                            <input type="text" id="category-search" class="search-field product-search-field" placeholder="Search product...">
                                             <div class="search-btn">
                                                 <button><i class="icon-magnifier"></i></button>
                                             </div>

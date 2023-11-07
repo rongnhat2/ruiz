@@ -2923,6 +2923,10 @@ img.mfp-img {
   line-height: 20px;
   padding: 0;
   text-transform: capitalize;
+  
+  overflow: hidden;
+  white-space: nowrap; 
+  text-overflow: ellipsis;
 }
 .single-product-area .product-caption .new-price {
   color: #c89979;

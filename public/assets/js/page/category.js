@@ -83,7 +83,7 @@ const View = {
         render(data){
             data.map(v => {
                 $(".brand-list")
-                    .append(`<li  class="has-sub"><a href="#">${v.name}</a></li>`)
+                    .append(`<li  class="has-sub"><a href="/category?tag=${v.id}">${v.name}</a></li>`)
             })
         }
     },
@@ -166,7 +166,7 @@ const View = {
     function init(){
         initData();
         View.Filter.page        = View.URL.get("page") ?? View.pagination.page
-        // View.Filter.tag         = View.URL.get("tag") ?? 0
+        View.Filter.tag         = View.URL.get("tag") ?? 0
         // View.Filter.keyword     = View.URL.get("keyword") ?? ''
         // View.Filter.prices      = View.URL.get("prices") ?? $(".js-range-slider").val().replace(/,/g, '') 
         // View.Filter.sort        = View.URL.get("sort") ?? View.Sort.getVal()

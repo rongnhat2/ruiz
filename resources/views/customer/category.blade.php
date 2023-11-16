@@ -81,14 +81,14 @@
                                 <!-- shop-sidebar end -->
 
                                 <!-- shop-sidebar start -->
-                                <div class="shop-sidebar mb-30">
+                                <!-- <div class="shop-sidebar mb-30">
                                     <h4 class="title">Filter by Color</h4>
 
                                     <ul class="category-widget-list color-list">
                                         
                                     </ul>
 
-                                </div>
+                                </div> -->
                                 <!-- shop-sidebar end -->
  
                             </div>

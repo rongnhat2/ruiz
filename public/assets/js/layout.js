@@ -319,6 +319,7 @@ const IndexView = {
 
         var data_json = `{"id": "${data_id}", "color": "${data_color}", "quantity": "${data_quantity}" }`
         
+
         if (card == null || card == ""){
             card = [];
             card.push(data_json)
@@ -337,6 +338,15 @@ const IndexView = {
             }
         } 
         IndexView.Cart.update();
+    })
+
+    $(".show-password").on("click", function(){
+        let default_pass = $(this).parent().find("input").attr("type");
+        if (default_pass == "password") {
+            $(this).parent().find("input").attr("type", "text")
+        }else{ 
+            $(this).parent().find("input").attr("type", "password")
+        }
     })
     init();
 })();

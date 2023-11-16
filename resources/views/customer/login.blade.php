@@ -45,7 +45,13 @@
                                         <div  >
                                             <div class="login-input-box">
                                                 <input type="email" name="user-name" placeholder="Email" class="data-email">
-                                                <input type="password" name="user-password" placeholder="Password" class="data-password">
+                                                <div style="position: relative;">
+                                                    <input type="password" name="user-password" placeholder="Password" class="data-password">
+                                                    <img class="show-password"
+                                                        style="position: absolute; width: 30px; height: 30px; top: 5px; right:  5px; cursor: pointer;" 
+                                                        src="https://static.vecteezy.com/system/resources/previews/000/637/727/original/vector-eye-icon-symbol-sign.jpg" 
+                                                        alt="">
+                                                </div>
                                             </div>
                                             <div class="button-box"> 
                                                 <div class="button-box">

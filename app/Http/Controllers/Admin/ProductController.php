@@ -108,4 +108,18 @@ class ProductController extends Controller
         $this->product->delete($id); 
         return $this->product->send_response(200, "Delete successful", null);
     } 
+
+    public function customer_get(Request $request){
+        $count = count($this->product->get_all_condition($request));
+
+        $data_product = $this->product->get_condition($request, $count); 
+        
+
+        $data_return = [
+            "data"      => $data_product,
+            "count"     => $count,
+        ];
+        return $this->product->send_response(200, $data_return, null);
+    }
+    
 }

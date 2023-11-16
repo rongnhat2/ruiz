@@ -358,6 +358,7 @@
     <script src="{{ asset("assets/js/main.js") }}"></script>
     <script src="{{ asset('assets/js/api.js') }}"></script>
     <script src="{{ asset('assets/js/layout.js') }}"></script>
+    <script src="{{ asset('assets/js/pagination.js') }}"></script>
     @yield('js')
 
 </body>

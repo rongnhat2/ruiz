@@ -197,7 +197,7 @@ Route::prefix('apip')->group(function () {
     });
     Route::prefix('product')->group(function () {
         Route::get('get-all-new', 'Admin\ProductController@get_all_new')->name('admin.product.get_all_new');
-        Route::get('/get', 'Admin\ProductController@get')->name('admin.product.get');
+        Route::get('/get', 'Admin\ProductController@customer_get')->name('admin.product.get');
         Route::post('/store', 'Admin\ProductController@store')->name('admin.product.store');
         Route::get('/get-one/{id}', 'Admin\ProductController@get_one')->name('admin.product.get_one');
         Route::post('/update', 'Admin\ProductController@update')->name('admin.product.update');

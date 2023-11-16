@@ -86,5 +86,76 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
                 ->leftjoin("color", "product_color.color_id", "=", "color.id")
                 ->get(); 
     }
+
+    
+
+    public function get_all_condition($request){
+        $brand_id    = $request->tag;
+        $keyword        = $request->keyword;
+        $sort           = $request->sort;
+        // list($prices_from, $prices_to) = explode(';', $request->prices, 2);
+        if ($request->status == "sale") {
+            return DB::table('discount') 
+                ->select("product.*", 'brand.name as brand_name')
+                ->leftjoin("product", "product.id", "=", "discount.product_id") 
+                ->leftjoin('brand', 'product.brand_id', '=', 'brand.id')
+                ->where([
+                            ["discount.percent", "<>", "0"], 
+                            ["discount.status", "<>", "0"]
+                        ]) 
+                // ->whereBetween('product.prices', [$prices_from, $prices_to])
+                ->get(); 
+        }else{
+            return DB::table('product') 
+                ->select("product.*", 'brand.name as brand_name') 
+                ->leftjoin('brand', 'product.brand_id', '=', 'brand.id') 
+                ->when($brand_id > 0, function ($query) use ($brand_id) {
+                    return $query->where('product.brand_id', $brand_id);
+                }) 
+                ->when($keyword != "", function ($query) use ($keyword) {
+                    $query->where('product.search_name', "like", "%".$keyword."%");
+                })  
+                // ->whereBetween('product.prices', [$prices_from, $prices_to])
+                ->get(); 
+        } 
+    }
+    public function get_condition($request, $count){
+        $brand_id    = $request->tag;
+        $keyword        = $request->keyword;
+        $sort           = $request->sort;
+        $page           = $request->page;
+        
+        // list($prices_from, $prices_to) = explode(';', $request->prices, 2); 
+        
+        return DB::table('product') 
+            ->select("product.*", 'brand.name as brand_name') 
+            ->leftjoin('brand', 'product.brand_id', '=', 'brand.id') 
+            ->when($brand_id > 0, function ($query) use ($brand_id) { 
+                $query->where('product.brand_id', "=", $brand_id); 
+            }) 
+            ->when($keyword != "", function ($query) use ($keyword) {
+                $query->where('product.search_name', "like", "%".$keyword."%");
+            }) 
+            ->when($sort == "1", function ($query) {
+                $query->orderByDesc('product.created_at');
+            }) 
+            ->when($sort == "2", function ($query) {
+                $query->orderBy('product.name');
+            }) 
+            ->when($sort == "3", function ($query) {
+                $query->orderByDesc('product.name');
+            }) 
+            ->when($sort == "4", function ($query) {
+                $query->orderBy('product.prices');
+            }) 
+            ->when($sort == "5", function ($query) {
+                $query->orderByDesc('product.prices');
+            }) 
+            // ->where([['product.prices', ">=", $prices_from], ['product.prices', "<=", $prices_to]])
+            // ->whereBetween('product.prices', [$prices_from, $prices_to])
+            ->offset(($page-1) * 8)
+            ->limit(8)
+            ->get();  
+    }
  
 }

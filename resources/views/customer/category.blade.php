@@ -90,27 +90,7 @@
 
                                 </div>
                                 <!-- shop-sidebar end -->
-
-                                <!-- shop-sidebar start -->
-                                <div class="shop-sidebar mb-30">
-                                    <h4 class="title">Product tags</h4>
-
-                                    <ul class="sidebar-tag">
-                                        <li><a href="#">accesories</a></li>
-                                        <li><a href="#">blouse</a></li>
-                                        <li><a href="#">clothes</a></li>
-                                        <li><a href="#">desktop</a></li>
-                                        <li><a href="#">digital</a></li>
-                                        <li><a href="#">fashion</a></li>
-                                        <li><a href="#">women</a></li>
-                                        <li><a href="#">men</a></li>
-                                        <li><a href="#">laptop</a></li>
-                                        <li><a href="#">handbag</a></li>
-                                    </ul>
-
-                                </div>
-                                <!-- shop-sidebar end -->
-
+ 
                             </div>
                         </div>
                         <!-- shop-sidebar-wrap end -->
@@ -169,7 +149,7 @@
                             <!-- shop-products-wrap end -->
 
                             <!-- paginatoin-area start -->
-                            <div class="paginatoin-area">
+                            <!-- <div class="paginatoin-area">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12">
                                         <ul class="pagination-box">
@@ -182,7 +162,12 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
+                            
+                            <nav class="d-md-flex justify-content-between align-items-center border-top pt-3" aria-label="Page navigation example">
+                                <div class="text-center text-md-left mb-3 mb-md-0">Hiển thị <span class="count-start"></span> - <span class="count-end"></span> trong <span class="count-total"></span> kết quả</div>
+                                <div class="woocommerce-pagination"> </div>
+                            </nav>
                             <!-- paginatoin-area end -->
                         </div>
                         <!-- shop-product-wrapper end -->

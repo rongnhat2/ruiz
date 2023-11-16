@@ -2,6 +2,8 @@ const View = {
 
     Product: {
         render(data){
+            $(".grid-item .col-lg-4").remove()
+            $(".list-item .shop-product-list-wrap").remove()
             data.map(v => {
                 $(".grid-item")
                     .append(`<div class="col-lg-4 col-md-6">
@@ -93,6 +95,68 @@ const View = {
             })
         }
     },
+    
+    pagination: {
+        page: 1,
+        pageSize: 15,
+        total: 0,
+        onChange(callback) {
+            const oThis = this;
+            $(document).on('click', '.woocommerce-pagination .paginate_button.page-item:not(.disabled, .active)', function () {
+                const page = $(this).text();
+                let nextPage = null;
+                if (page.match(/Next/g)) {
+                    nextPage = oThis.page + 1;
+                }
+                else if (page.match(/Previous/g)) {
+                    nextPage = oThis.page - 1;
+                }
+                else {
+                    nextPage = +page;
+                }
+                callback(+nextPage);
+                oThis.page = +nextPage;
+            });
+        },
+        length(){
+            return Math.ceil(this.total / this.pageSize);
+        },
+        render() {
+            const paginationHTML = generatePagination(this.page, Math.ceil(this.total / this.pageSize));  
+            $('.woocommerce-pagination').html(paginationHTML)
+
+            const startEntry = this.pageSize * (this.page - 1) + 1;
+            const lastEntry = Math.min(this.pageSize * this.page, this.total);
+        }
+    },
+    Filter: {
+        page: "",
+        keyword: "",
+        tag: "",
+        prices: "",
+        sort: "",
+    },
+    URL: {
+        setURL(filters){
+            const param     = (new URLSearchParams({ ...filters })).toString();
+            window.history.pushState('','', '?' + param);
+        },
+        getFilterURL(){
+            // lấy ra url và trả về chuỗi filter tương ứng
+            var urlParam    = new URLSearchParams(window.location.search);
+            return filters  = {
+                page:           View.Filter.page,
+                keyword:        View.Filter.keyword,
+                tag:            View.Filter.tag,
+                prices:         View.Filter.prices,
+                sort:           View.Filter.sort,
+            };
+        },
+        get(id){
+            var urlParam    = new URLSearchParams(window.location.search);
+            return urlParam.get(id)
+        }
+    },
     init(){
 
     }
@@ -101,6 +165,11 @@ const View = {
     View.init();
     function init(){
         initData();
+        // View.Filter.tag         = View.URL.get("tag") ?? 0
+        // View.Filter.keyword     = View.URL.get("keyword") ?? ''
+        // View.Filter.prices      = View.URL.get("prices") ?? $(".js-range-slider").val().replace(/,/g, '') 
+        // View.Filter.sort        = View.URL.get("sort") ?? View.Sort.getVal()
+        // View.URL.setURL(View.URL.getFilterURL())
     }
 
     async function initData() { 
@@ -108,12 +177,19 @@ const View = {
         await getData();
         await getColor();
     } 
+    View.pagination.onChange((page) => { 
+        View.Filter.page  = page
+        View.URL.setURL(View.URL.getFilterURL())
+        getData();
+    })
 
  
     function getData(){
         Api.Product.GetAll()
             .done(res => {
-                View.Product.render(res.data)
+                View.Product.render(res.data.data)
+                View.pagination.total = res.data.count;
+                View.pagination.render();
             })
             .fail(err => { IndexView.helper.showToastError('Error', 'Error'); })
             .always(() => { });
@@ -126,7 +202,6 @@ const View = {
             .fail(err => { IndexView.helper.showToastError('Error', 'Error'); })
             .always(() => { });
     }
- 
     function getColor(){
         Api.Color.GetAll()
             .done(res => {

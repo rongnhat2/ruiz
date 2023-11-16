@@ -98,7 +98,7 @@ const View = {
     
     pagination: {
         page: 1,
-        pageSize: 1,
+        pageSize: 6,
         total: 0,
         onChange(callback) {
             const oThis = this;

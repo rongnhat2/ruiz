@@ -153,8 +153,8 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
             }) 
             // ->where([['product.prices', ">=", $prices_from], ['product.prices', "<=", $prices_to]])
             // ->whereBetween('product.prices', [$prices_from, $prices_to])
-            ->offset(($page-1) * 8)
-            ->limit(8)
+            ->offset(($page-1) * 1)
+            ->limit(1)
             ->get();  
     }
  

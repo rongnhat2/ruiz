@@ -165,11 +165,12 @@ const View = {
     View.init();
     function init(){
         initData();
+        View.Filter.page        = View.URL.get("page") ?? View.pagination.page
         // View.Filter.tag         = View.URL.get("tag") ?? 0
         // View.Filter.keyword     = View.URL.get("keyword") ?? ''
         // View.Filter.prices      = View.URL.get("prices") ?? $(".js-range-slider").val().replace(/,/g, '') 
         // View.Filter.sort        = View.URL.get("sort") ?? View.Sort.getVal()
-        // View.URL.setURL(View.URL.getFilterURL())
+        View.URL.setURL(View.URL.getFilterURL())
     }
 
     async function initData() { 
@@ -185,7 +186,7 @@ const View = {
 
  
     function getData(){
-        Api.Product.GetAll()
+        Api.Product.GetAll(View.URL.getFilterURL())
             .done(res => {
                 View.Product.render(res.data.data)
                 View.pagination.total = res.data.count;

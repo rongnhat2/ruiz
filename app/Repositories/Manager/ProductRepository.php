@@ -125,6 +125,7 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
         $sort           = $request->sort;
         $page           = $request->page;
         
+        
         // list($prices_from, $prices_to) = explode(';', $request->prices, 2); 
         
         return DB::table('product') 
@@ -153,8 +154,8 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
             }) 
             // ->where([['product.prices', ">=", $prices_from], ['product.prices', "<=", $prices_to]])
             // ->whereBetween('product.prices', [$prices_from, $prices_to])
-            ->offset(($page-1) * 1)
-            ->limit(1)
+            ->offset(($page-1) * 6)
+            ->limit(6)
             ->get();  
     }
  

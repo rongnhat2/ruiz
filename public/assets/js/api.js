@@ -108,9 +108,17 @@ const Api = {
 
 //Product
 (() => {
-    Api.Product.GetAll = () => $.ajax({
+    Api.Product.GetAll = (filter) => $.ajax({
         url: `/apip/product/get`,
         method: 'GET',
+        dataType: 'json',
+        data: {
+            keyword: filter.keyword ?? '',
+            tag: filter.tag ?? '',
+            page: filter.page ?? '', 
+            prices: filter.prices ?? '',
+            sort: filter.sort ?? '', 
+        }
     }); 
     Api.Product.GetAllNew = () => $.ajax({
         url: `/apip/product/get-all-new`,

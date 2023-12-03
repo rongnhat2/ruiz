@@ -137,71 +137,55 @@
                                 <!-- Start Single Content -->
                                 <div class="product_tab_content tab-pane" id="reviews" role="tabpanel">
                                     <div class="review_address_inner mt-30">
-                                        <!-- Start Single Review -->
-                                        <div class="pro_review">
-                                            <div class="review_thumb">
-                                                <img alt="review images" src="assets/images/other/reviewer-60x60.jpg">
-                                            </div>
-                                            <div class="review_details">
-                                                <div class="review_info mb-10">
-                                                    <ul class="product-rating d-flex mb-10">
-                                                        <li><span class="icon-star"></span></li>
-                                                        <li><span class="icon-star"></span></li>
-                                                        <li><span class="icon-star"></span></li>
-                                                        <li><span class="icon-star"></span></li>
-                                                        <li><span class="icon-star"></span></li>
-                                                    </ul>
-                                                    <h5>Admin - <span> November 19, 2019</span></h5>
 
+                                    </div>
+                                    <?php if($data_response["comment"]): ?>
+                                        <!-- Start RAting Area -->
+                                        <div id="half-stars-example">
+                                            <div class="rating-group">
+                                                <input class="rating__input rating__input--none" name="rating2" id="rating2-0" value="0" type="radio">
+                                                <label aria-label="0 stars" class="rating__label" for="rating2-0">&nbsp;</label>
+                                                <label aria-label="1 star" class="rating__label" for="rating2-10">
+                                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
+                                                </label>
+                                                <input class="rating__input" name="rating2" id="rating2-10" value="1" type="radio">
+                                                <label aria-label="2 stars" class="rating__label" for="rating2-20">
+                                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
+                                                </label>
+                                                <input class="rating__input" name="rating2" id="rating2-20" value="2" type="radio">
+                                                <label aria-label="3 stars" class="rating__label" for="rating2-30">
+                                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
+                                                </label>
+                                                <input class="rating__input" name="rating2" id="rating2-30" value="3" type="radio">
+                                                <label aria-label="4 stars" class="rating__label" for="rating2-40">
+                                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
+                                                </label>
+                                                <input class="rating__input" name="rating2" id="rating2-40" value="4" type="radio">
+                                                <label aria-label="5 stars" class="rating__label" for="rating2-50">
+                                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
+                                                </label>
+                                                <input class="rating__input" name="rating2" id="rating2-50" value="5" type="radio" checked="">
+                                            </div>
+                                        </div>
+                                        <!-- End RAting Area -->
+                                        <div class="comments-area comments-reply-area">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="comment-form-area">
+                                                        <div class="comment-form-comment mt-15">
+                                                            <label>Comment</label>
+                                                            <textarea id="comment" class="comment-notes data_comment" required="required"></textarea>
+                                                        </div>
+                                                        <div class="comment-form-submit mt-15">
+                                                            <button type="button" class="btn btn-primary-dark btn-wide transition-3d-hover comment-submit" atr="Comment Submit">Submit</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in viverra ex, vitae vestibulum arcu. Duis sollicitudin metus sed lorem commodo, eu dapibus libero interdum. Morbi convallis viverra erat, et aliquet orci congue vel. Integer in odio enim. Pellentesque in dignissim leo. Vivamus varius ex sit amet quam tincidunt iaculis.</p>
                                             </div>
                                         </div>
-                                        <!-- End Single Review -->
-                                    </div>
-                                    <!-- Start RAting Area -->
-                                    <div class="rating_wrap mt-50">
-                                        <h5 class="rating-title-1">Add a review </h5>
-                                        <p>Your email address will not be published. Required fields are marked *</p>
-                                        <h6 class="rating-title-2">Your Rating</h6>
-                                        <div class="rating_list">
-                                            <div class="review_info mb-10">
-                                                <ul class="product-rating d-flex mb-10">
-                                                    <li><span class="icon-star"></span></li>
-                                                    <li><span class="icon-star"></span></li>
-                                                    <li><span class="icon-star"></span></li>
-                                                    <li><span class="icon-star"></span></li>
-                                                    <li><span class="icon-star"></span></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End RAting Area -->
-                                    <div class="comments-area comments-reply-area">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <form action="#" class="comment-form-area">
-                                                    <div class="row comment-input">
-                                                        <div class="col-md-6 comment-form-author mt-15">
-                                                            <label>Name <span class="required">*</span></label>
-                                                            <input type="text" required="required" name="Name">
-                                                        </div>
-                                                        <div class="col-md-6 comment-form-email mt-15">
-                                                            <label>Email <span class="required">*</span></label>
-                                                            <input type="text" required="required" name="email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="comment-form-comment mt-15">
-                                                        <label>Comment</label>
-                                                        <textarea class="comment-notes" required="required"></textarea>
-                                                    </div>
-                                                    <div class="comment-form-submit mt-15">
-                                                        <input type="submit" value="Submit" class="comment-submit">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <?php else: ?>
+                                        <p class="mt-3">You can't comment now</p>
+                                    <?php endif; ?>
                                 </div>
                                 <!-- End Single Content -->
                             </div>

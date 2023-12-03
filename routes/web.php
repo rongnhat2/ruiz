@@ -53,6 +53,10 @@ Route::prefix('customer')->group(function () {
             Route::get('get', 'Admin\BlogController@get')->name('customer.category.get');
         }); 
 
+        Route::prefix('comment')->group(function () {
+            Route::get('get/{id}', 'Customer\CommentController@get')->name('customer.comment.get');
+            Route::post('create', 'Customer\CommentController@create')->name('customer.comment.create');
+        });
 
         Route::prefix('category')->group(function () {
             Route::get('get', 'Customer\CategoryController@get')->name('customer.category.get');

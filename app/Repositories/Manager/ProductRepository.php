@@ -87,13 +87,27 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
                 ->get(); 
     }
 
-    
+    public function can_comment($id, $product_id){
+        if (!$id["id"]) {
+            return false;
+        }else{
+            $data = DB::table('order_list') 
+                ->leftjoin('order_detail', 'order_detail.order_id', '=', 'order_list.id') 
+                ->where([['order_list.customer_id', $id["id"]], ['order_detail.product_id', $product_id]])
+                ->get();
+            if (count($data) > 0) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
 
     public function get_all_condition($request){
         $brand_id    = $request->tag;
         $keyword        = $request->keyword;
         $sort           = $request->sort;
-        // list($prices_from, $prices_to) = explode(';', $request->prices, 2);
+        list($prices_from, $prices_to) = explode('-', $request->prices, 2);
         if ($request->status == "sale") {
             return DB::table('discount') 
                 ->select("product.*", 'brand.name as brand_name')
@@ -103,7 +117,7 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
                             ["discount.percent", "<>", "0"], 
                             ["discount.status", "<>", "0"]
                         ]) 
-                // ->whereBetween('product.prices', [$prices_from, $prices_to])
+                ->whereBetween('product.prices', [$prices_from, $prices_to])
                 ->get(); 
         }else{
             return DB::table('product') 
@@ -115,7 +129,7 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
                 ->when($keyword != "", function ($query) use ($keyword) {
                     $query->where('product.search_name', "like", "%".$keyword."%");
                 })  
-                // ->whereBetween('product.prices', [$prices_from, $prices_to])
+                ->whereBetween('product.prices', [$prices_from, $prices_to])
                 ->get(); 
         } 
     }
@@ -125,8 +139,9 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
         $sort           = $request->sort;
         $page           = $request->page;
         
+        list($prices_from, $prices_to) = explode('-', $request->prices, 2); 
         
-        // list($prices_from, $prices_to) = explode(';', $request->prices, 2); 
+        
         
         return DB::table('product') 
             ->select("product.*", 'brand.name as brand_name') 
@@ -137,23 +152,7 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
             ->when($keyword != "", function ($query) use ($keyword) {
                 $query->where('product.search_name', "like", "%".$keyword."%");
             }) 
-            ->when($sort == "1", function ($query) {
-                $query->orderByDesc('product.created_at');
-            }) 
-            ->when($sort == "2", function ($query) {
-                $query->orderBy('product.name');
-            }) 
-            ->when($sort == "3", function ($query) {
-                $query->orderByDesc('product.name');
-            }) 
-            ->when($sort == "4", function ($query) {
-                $query->orderBy('product.prices');
-            }) 
-            ->when($sort == "5", function ($query) {
-                $query->orderByDesc('product.prices');
-            }) 
-            // ->where([['product.prices', ">=", $prices_from], ['product.prices', "<=", $prices_to]])
-            // ->whereBetween('product.prices', [$prices_from, $prices_to])
+            ->whereBetween('product.prices', [$prices_from, $prices_to])
             ->offset(($page-1) * 6)
             ->limit(6)
             ->get();  

@@ -5,6 +5,7 @@ const Api = {
     Product: {},  
     Order: {},
     Blog: {},
+    Comment: {},
 
 
 
@@ -81,6 +82,22 @@ const Api = {
     });
 
 })();
+
+//Comment
+(() => {
+    Api.Comment.GetAll = (id) => $.ajax({
+        url: `/customer/apip/comment/get/${id}`,
+        method: 'GET',
+    });
+    Api.Comment.Create = (data) => $.ajax({
+        url: `/customer/apip/comment/create`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    }); 
+})();
+
 
 //Color
 (() => {

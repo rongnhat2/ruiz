@@ -168,7 +168,7 @@ const View = {
         View.Filter.page        = View.URL.get("page") ?? View.pagination.page
         View.Filter.tag         = View.URL.get("tag") ?? 0
         // View.Filter.keyword     = View.URL.get("keyword") ?? ''
-        // View.Filter.prices      = View.URL.get("prices") ?? $(".js-range-slider").val().replace(/,/g, '') 
+        View.Filter.prices      = View.URL.get("prices") ?? $(".value-price").val()
         // View.Filter.sort        = View.URL.get("sort") ?? View.Sort.getVal()
         View.URL.setURL(View.URL.getFilterURL())
     }
@@ -184,6 +184,12 @@ const View = {
         getData();
     })
 
+
+    $(".add-to-cart-button").on("click", () => {
+        View.Filter.prices = $(".value-price").val()
+        View.URL.setURL(View.URL.getFilterURL())
+        getData();
+    })
  
     function getData(){
         Api.Product.GetAll(View.URL.getFilterURL())

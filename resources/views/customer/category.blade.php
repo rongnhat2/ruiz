@@ -55,10 +55,10 @@
                                     <h4 class="title">Filter By Price</h4>
                                     <!-- filter-price-content start -->
                                     <div class="filter-price-content">
-                                        <form action="#" method="post">
+                                        <div>
                                             <div id="price-slider" class="price-slider"></div>
                                             <div class="filter-price-wapper">
-
+                                                <input type="hidden" class="value-price" value="0-1000">
                                                 <a class="add-to-cart-button" href="#">
                                                     <span>FILTER</span>
                                                 </a>
@@ -70,11 +70,11 @@
                                                     </div>
                                                     <span>—</span>
                                                     <div class="input-type">
-                                                        <input type="text" id="max-price" readonly="" />
+                                                        <input type="text" id="max-price" readonly="" style="width: 60px;" />
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                     <!-- filter-price-content end -->
                                 </div>

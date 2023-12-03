@@ -54,6 +54,13 @@
                                                         src="https://static.vecteezy.com/system/resources/previews/000/637/727/original/vector-eye-icon-symbol-sign.jpg" 
                                                         alt="">
                                                 </div>
+                                                <div style="position: relative;">
+                                                    <input type="password" class="data-password-repert" name="user-password-repert" placeholder="Repert Password">
+                                                    <img class="show-password"
+                                                        style="position: absolute; width: 30px; height: 30px; top: 5px; right:  5px; cursor: pointer;" 
+                                                        src="https://static.vecteezy.com/system/resources/previews/000/637/727/original/vector-eye-icon-symbol-sign.jpg" 
+                                                        alt="">
+                                                </div>
                                                 
                                             </div>
                                             <div class="button-box">

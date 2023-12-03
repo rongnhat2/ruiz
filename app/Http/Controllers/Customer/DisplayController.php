@@ -33,12 +33,14 @@ class DisplayController extends Controller
     public function product(Request $request, $slug){
         $customer_data = static::generate_logined($request); 
         $data = $this->product->get_one_slug($slug);
+        $comment = $this->product->can_comment($customer_data, $data->id);
+        
         $color = $this->product->get_color($data->id);
         $data_response = [
             "data" => $data,
-            "color" => $color
+            "color" => $color,
+            "comment" => $comment
         ];
-        // dd($data_response["color"]);
         return view('customer.product', compact("data_response", "customer_data"));
     }
     public function category(Request $request){

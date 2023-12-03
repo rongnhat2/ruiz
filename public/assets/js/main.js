@@ -274,11 +274,12 @@ $('[data-countdown]').each(function() {
 $( "#price-slider" ).slider({
    range: true,
    min: 0,
-   max: 120,
-   values: [ 20, 115 ],
+   max: 1000,
+   values: [ 0, 1000 ],
    slide: function( event, ui ) {
         $( "#min-price" ).val('$' + ui.values[ 0 ] );
         $( "#max-price" ).val('$' + ui.values[ 1 ] );
+        $(".value-price").val(ui.values[ 0 ] + "-" + ui.values[ 1 ])
      }
   });
   $( "#min-price" ).val('$' + $( "#price-slider" ).slider( "values", 0 ));   

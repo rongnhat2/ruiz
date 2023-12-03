@@ -139,6 +139,17 @@
                                             </div>
                                             <!-- ACCORDION END -->
                                         </div>
+
+                                        <div class="payment-accordion">
+                                            <p>
+                                                <input type="radio" name="payment">
+                                                Banking
+                                            </p>    
+                                            <p>
+                                                <input type="radio" name="payment">
+                                                COD
+                                            </p>    
+                                        </div>
                                         <div class="order-button-payment">
                                             <input type="button" value="Place order" class="button-payment" />
                                         </div>

@@ -71,7 +71,6 @@ const View = {
                 }
                 $(".review_address_inner")
                     .append(`
-
                         <div class="pro_review">
                             <div class="review_details">
                                 <div class="review_info mb-10">
@@ -116,9 +115,9 @@ const View = {
             }
         },
         onSuccess(){
-            $("#reviews").prepend(`<span class="label label-success">Comment successful</span>`)
+            $(".comments-area").prepend(`<span class="label label-success">Comment successful</span>`)
             setTimeout(function() {
-                $("#reviews .label").remove()
+                $(".comments-area .label").remove()
             }, 2000);
         },
     },

@@ -44,6 +44,7 @@
                                 <div class="login-form-container">
                                     <div class="login-register-form">
                                         <div id="signup" >
+                                            <div class="js-validate"></div>
                                             <div class="login-input-box">
                                                 <input type="text" class="data-name" name="user-name" placeholder="User Name">
                                                 <input name="user-email" class="data-email" placeholder="Email" type="email">

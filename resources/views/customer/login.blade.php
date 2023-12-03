@@ -43,6 +43,7 @@
                                 <div class="login-form-container">
                                     <div class="login-register-form"> 
                                         <div  >
+                                            <div class="js-validate"></div>
                                             <div class="login-input-box">
                                                 <input type="email" name="user-name" placeholder="Email" class="data-email">
                                                 <div style="position: relative;">

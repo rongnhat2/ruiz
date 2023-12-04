@@ -276,7 +276,7 @@ const View = {
         Api.Product.GetAll()
             .done(res => {
                 IndexView.table.clearRows();
-                Object.values(res.data.data).map(v => {
+                Object.values(res.data).map(v => {
                     IndexView.table.insertRow(View.table.__generateDTRow(v));
                     IndexView.table.render();
                 })

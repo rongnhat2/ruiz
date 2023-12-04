@@ -119,7 +119,7 @@ const Api = {
 //Product
 (() => {
     Api.Product.GetAll = () => $.ajax({
-        url: `/apip/product/get`,
+        url: `/apip/product/get-all`,
         method: 'GET',
     }); 
     Api.Product.Store = (data) => $.ajax({

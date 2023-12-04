@@ -112,7 +112,6 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
         if ($request->prices) {
             list($prices_from, $prices_to) = explode('-', $request->prices, 2);
         }
-        $prices_to = 1000;
         
 
         return DB::table('product') 
@@ -138,7 +137,6 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
         if ($request->prices) {
             list($prices_from, $prices_to) = explode('-', $request->prices, 2);
         }
-        $prices_to = 1000;
 
         return DB::table('product') 
             ->select("product.*", 'brand.name as brand_name') 

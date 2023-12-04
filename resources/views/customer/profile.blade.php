@@ -68,7 +68,7 @@
                                     <ul role="tablist" class="nav flex-column dashboard-list">
                                         <li><a href="#dashboard" data-bs-toggle="tab" class="nav-link active">Dashboard</a></li>
                                         <li> <a href="#orders" data-bs-toggle="tab" class="nav-link">Orders</a></li>  
-                                        <li><a href="#account-details" data-bs-toggle="tab" class="nav-link">Account details</a></li>
+                                        <li><a href="#account-details" data-bs-toggle="tab" class="nav-link">Change Password</a></li>
                                         <li><a href="#" class="nav-link" onclick="event.preventDefault();document.getElementById('logout-form').submit(); localStorage.removeItem('ruiz-cart')">logout</a></li>
                                     </ul>
                                 </div>
@@ -103,19 +103,11 @@
                                                     <div class="account-login-form">
                                                         <div> 
                                                             <div class="account-input-box">
-                                                                <label>Username</label>
-                                                                <input type="text" name="first-name"> 
-                                                                <label>Email</label>
-                                                                <input type="text" name="email-name">
                                                                 <label>Password</label>
-                                                                <input type="password" name="user-password">
-                                                                <label>Address</label>
-                                                                <input type="text" placeholder="MM/DD/YYYY" value="" name="address">
-                                                                <label>Telephone</label>
-                                                                <input type="text" placeholder="0xxx xxx xxx" value="" name="telephone">
+                                                                <input type="password" name="user-password" class="data-password">
                                                             </div>  
                                                             <div class="button-box">
-                                                                <button class="btn default-btn"  >Save</button>
+                                                                <button class="btn default-btn password-update" atr="Update" >Save</button>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -270,11 +270,11 @@ const View = {
             },                  
         },
 		onUpdate(name, callback){
-	        $(document).on('click', `.profile-data-block[tab-data=Password] .action-save`, function() {
-	        	if($(this).attr('atr').trim() == name) {
-	        		var data = View.Password.getVal();
-                    if (data) callback(data);
-                }
+	        $(document).on('click', `.password-update`, function() {
+            	var fd = new FormData();
+            	var data_password          = $('.data-password').val();
+                fd.append('data_password', data_password);
+	        	callback(fd);
 	        });
 	    },
 		onSend(name, callback){
@@ -346,7 +346,7 @@ const View = {
             .done(res => { 
             	if (res.status == 200) {
                     View.Password.response.success(res.message)
-                    redirect_logined("/profile?tab=Password")
+                    redirect_logined("/profile")
                 }else{
                 	View.Password.response.error(res.message)
                 }

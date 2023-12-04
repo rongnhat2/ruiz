@@ -149,29 +149,42 @@ class AuthController extends Controller
 
     // Đổi mật khẩu
     public function change(Request $request){
-        $is_user = static::check_token($request); 
+        $is_user = static::check_token2($request); 
         if ($is_user) {
             list($user_id, $token) = static::unpack_token($request); 
             $customer = $this->customer->find_with_id($user_id);
-            $check_password = Hash::check($request->data_oldpass, $customer->password);
-            if ($check_password) {
-                if ($request->data_code == $customer->verify_code) {
-                    $code = mt_rand(1, 9999999);
-                    $data_change = [
-                        "secret_key"    => $code, 
-                        "password"      => Hash::make($request->data_newpass),
-                        "verify_code"   => null,
-                    ];
-                    $this->customer->update($data_change, $user_id);
-                    $tokenAuth = $user_id . '$' . Hash::make($user_id . '$' . $code);
-                    Cookie::queue('_token_', $tokenAuth, 2628000);
-                    return $this->customer->send_response("Đổi mật khẩu thành công", null, 200); 
-                }else{
-                    return $this->customer->send_response("Mã bảo mật không đúng", null, 500); 
-                }
-            }else{
-                return $this->customer->send_response("Mật khẩu cũ không đúng", null, 500); 
-            }
+            $code = mt_rand(1, 9999999);
+            $data_change = [
+                "secret_key"    => $code, 
+                "password"      => Hash::make($request->data_newpass),
+                "verify_code"   => null,
+            ];
+            
+            $this->customer->update($data_change, $user_id);
+            $tokenAuth = $user_id . '$' . Hash::make($user_id . '$' . $code);
+            Cookie::queue('_token_', $tokenAuth, 2628000);
+            return $this->customer->send_response("Đổi mật khẩu thành công", null, 200); 
+
+
+            // $check_password = Hash::check($request->data_oldpass, $customer->password);
+            // if ($check_password) {
+            //     if ($request->data_code == $customer->verify_code) {
+            //         $code = mt_rand(1, 9999999);
+            //         $data_change = [
+            //             "secret_key"    => $code, 
+            //             "password"      => Hash::make($request->data_newpass),
+            //             "verify_code"   => null,
+            //         ];
+            //         $this->customer->update($data_change, $user_id);
+            //         $tokenAuth = $user_id . '$' . Hash::make($user_id . '$' . $code);
+            //         Cookie::queue('_token_', $tokenAuth, 2628000);
+            //         return $this->customer->send_response("Đổi mật khẩu thành công", null, 200); 
+            //     }else{
+            //         return $this->customer->send_response("Mã bảo mật không đúng", null, 500); 
+            //     }
+            // }else{
+            //     return $this->customer->send_response("Mật khẩu cũ không đúng", null, 500); 
+            // }
         }else{
             return $this->customer->send_response("Phiên đăng nhập hết hạn", '/', 500); 
         }
@@ -226,6 +239,22 @@ class AuthController extends Controller
             $user = $this->customer->get_secret($user_id);
             if ($user) {
                 return Hash::check($user_id . '$' . $user->secret_key, $token);
+            }else{
+                return false;
+            }
+        }else{
+            return abort('403');
+        }
+    }
+
+    // Kiểm tra token hợp lệ
+    public function check_token2(Request $request){
+        $token = $request->cookie('_token_');
+        if ($token) {
+            list($user_id, $token) = explode('$', $token, 2); 
+            $user = $this->customer->get_secret($user_id);
+            if ($user) {
+                return Hash::check($user_id . '$' . $user[0]->secret_key, $token);
             }else{
                 return false;
             }

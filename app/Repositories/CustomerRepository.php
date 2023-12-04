@@ -32,6 +32,10 @@ class CustomerRepository extends BaseRepository implements RepositoryInterface
                     ->first(); 
     }
 
+    // Tìm customer với Id
+    public function find_with_id($id){
+        return $this->model->where('customer_auth.id', '=', $id)->leftjoin("customer_detail", "customer_auth.id", "=", "customer_detail.customer_auth_id")->first();
+    }
 
     public function check_email($email){
         return $this->model->where('email', '=', $email)->first() ? true : false;

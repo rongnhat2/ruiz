@@ -28,6 +28,9 @@ Route::get('order-success', 'Customer\DisplayController@order_success')->name('c
 Route::get('register', 'Customer\DisplayController@register')->name('customer.view.register'); 
 Route::get('login', 'Customer\DisplayController@login')->name('customer.view.login'); 
 
+Route::get('forgot', 'Customer\DisplayController@forgot')->name('customer.view.forgot'); 
+Route::get('reset', 'Customer\DisplayController@reset')->name('customer.view.reset'); 
+
 Route::middleware(['AuthCustomer:login'])->group(function () {
     Route::get('register', 'Customer\DisplayController@register')->name('customer.view.register'); 
     Route::get('login', 'Customer\DisplayController@login')->name('customer.view.login'); 

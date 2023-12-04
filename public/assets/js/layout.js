@@ -87,10 +87,13 @@ const IndexView = {
                 var fd = new FormData();
                 var required_data = [];
                 var onPushData = true;
-                var data_email              = $(`${resource}`).find('.data-email').val(); 
-                if (IndexView.Config.isEmail(data_email) == null || data_email == '')  onPushData = false;  
+
+                var data_email              = $(`${resource}`).find('.data-email').val();
+
+                if (IndexView.Config.isEmail(data_email) == null || data_email == '')  onPushData = false; 
+
                 if (onPushData) {
-                    fd.append('data_email', data_email); 
+                    fd.append('data_email', data_email);
                     return fd;
                 }else{ 
                     return false;
@@ -100,6 +103,7 @@ const IndexView = {
                 var resource = this.resource;
                 $(document).on('click', `${resource} .form-submit`, function() {
                     if($(this).attr('atr').trim() == name) {
+                        $(this).text("Sending the code ....")
                         var data = IndexView.Auth.Forgot.getVal();
                         if (data) callback(data); 
                     }
@@ -133,6 +137,7 @@ const IndexView = {
                 var resource = this.resource;
                 $(document).on('click', `${resource} .form-submit`, function() {
                     if($(this).attr('atr').trim() == name) {
+                        $(this).text("Updating ....")
                         var data = IndexView.Auth.Reset.getVal();
                         if (data) callback(data); 
                     }
@@ -282,6 +287,32 @@ const IndexView = {
             .fail(err => {   })
             .always(() => { });
     })
+    IndexView.Auth.Forgot.onPush("Forgot", (fd) => { 
+        Api.Auth.Forgot(fd)
+            .done(res => {  
+                if (res.status == 500) {
+                    IndexView.Auth.response.error(res.message); 
+                }else{
+                    IndexView.Auth.response.success(res.message) ;
+                    redirect_logined("/reset")
+                }
+            })
+            .fail(err => {   })
+            .always(() => { });
+    })
+    IndexView.Auth.Reset.onPush("Reset", (fd) => {
+        Api.Auth.Reset(fd)
+            .done(res => {  
+                if (res.status == 200) {
+                    IndexView.Auth.response.success(res.message)  
+                    redirect_logined(res.data)
+                }else{
+                    IndexView.Auth.response.error(res.message); 
+                }
+            })
+            .fail(err => {   })
+            .always(() => { });
+    }) 
     IndexView.onSearch((fd, text) => {
         Api.Product.GetSearch(fd).done(res => { 
             $('.suggest-list .suggess-wrapper').remove()
@@ -340,7 +371,7 @@ const IndexView = {
         IndexView.Cart.update();
     })
 
-    $(".show-password").on("click", function(){
+    $(document).find(".show-password").on("click", function(){
         let default_pass = $(this).parent().find("input").attr("type");
         if (default_pass == "password") {
             $(this).parent().find("input").attr("type", "text")

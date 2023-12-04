@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Session;
 use Hash;
 use DB;
+use Mail; 
 
 class AuthController extends Controller
 {
@@ -61,7 +62,7 @@ class AuthController extends Controller
         $route_redirect = Session::get("url_save")  == null ? "/" : Session::get("url_save");
         if ($customer_id) { 
             Cookie::queue('_token_', $this->customer->createTokenClient($customer_id), 2628000);
-            return $this->customer->send_response("Đăng đăng thành công!! <br> Chuyển hướng sau 2 giây", $route_redirect, 200); 
+            return $this->customer->send_response("Login successful!! <br> Redirect on 2 seconds", $route_redirect, 200); 
         }else{
             return $this->customer->send_response("Tên tài khoản hoặc mật khẩu không chính xác", $route_redirect, 500); 
         }
@@ -79,15 +80,15 @@ class AuthController extends Controller
                 $this->customer->update(["verify_code" => $code], $customer->id);
                 $email = $request->data_email; 
                 Mail::send('email-forgot', array('code'=> $code), function($message) use ($email) {
-                    $message->from('techchat2110@gmail.com', 'Computer Store khôi phục mật khẩu');
-                    $message->to($email)->subject('Computer Store');
+                    $message->from('admin.ruiz@gmail.com', 'Ruiz khôi phục mật khẩu');
+                    $message->to($email)->subject('Ruiz Store');
                 });
-                return $this->customer->send_response("Kiểm tra email để nhận mã khôi phục", null, 200);
+                return $this->customer->send_response("Check your email to get Code Forgot", null, 200);
             // }else{
             //     return $this->customer->send_response("Hành động quá nhanh. Bạn cần đợi thêm ".(1-(int) $time_delta)." phút để nhận mã khôi phục", null, 500);
             // }
         }else{
-            return $this->customer->send_response("Email không tồn tại", null, 500);
+            return $this->customer->send_response("Email not visible", null, 500);
         }
     }
 
@@ -109,9 +110,9 @@ class AuthController extends Controller
                 $this->customer->update($data_auth, $customer->id);
                 $tokenAuth = $customer->id . '$' . Hash::make($customer->id . '$' . $secret_key);
                 Cookie::queue('_token_', $tokenAuth, 2628000);
-                return $this->customer->send_response("Khôi phục thành công!! <br> Tự động đăng nhập sau 2 giây", $route_redirect, 200);
+                return $this->customer->send_response("Update password successful!! <br> auto login on 2 seconds", $route_redirect, 200);
             }else{
-                return $this->customer->send_response("Mã bảo mật không chính xác", null, 500);
+                return $this->customer->send_response("Code verify Wrong", null, 500);
             }
         }else{
             return $this->customer->send_response("Mã khôi phục hết hạn", null, 500);

@@ -107,12 +107,13 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
         $brand_id    = $request->tag;
         $keyword        = $request->keyword;
         $sort           = $request->sort;
-        $prices_from = 0;
-        $prices_to = 100000;
+        $prices_from = 1;
+        $prices_to = 1000;
         if ($request->prices) {
-            
             list($prices_from, $prices_to) = explode('-', $request->prices, 2);
         }
+        $prices_to = 1000;
+        
 
         return DB::table('product') 
             ->select("product.*", 'brand.name as brand_name') 
@@ -133,14 +134,12 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
         $page           = $request->page;
         
         $prices_from = 0;
-        $prices_to = 100000;
+        $prices_to = 1000;
         if ($request->prices) {
-            
             list($prices_from, $prices_to) = explode('-', $request->prices, 2);
         }
-        
-        
-        
+        $prices_to = 1000;
+
         return DB::table('product') 
             ->select("product.*", 'brand.name as brand_name') 
             ->leftjoin('brand', 'product.brand_id', '=', 'brand.id') 

@@ -36,6 +36,7 @@ const View = {
 	}
 	function get_total(){
 		Api.Statistic.getTotal().done(res => { View.render_total(res) })
+		Api.Statistic.getMonth().done(res => { console.log(res); })
 		Api.Statistic.getBestSale().done(res => { View.render_sale(res) })
 	}
 

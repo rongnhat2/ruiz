@@ -163,5 +163,9 @@ class OrderController extends Controller
         
         return $customer_new;
     }
+    public function get_month(){
+        $customer_new = $this->order->get_month();
+        return $customer_new;
+    }
 
 }

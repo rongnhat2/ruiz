@@ -119,34 +119,15 @@
 
                                     <!-- your-order-wrap end -->
                                     <div class="payment-method">
-                                        <div class="payment-accordion">
-                                            <!-- ACCORDION START -->
-                                            <h5>Direct Bank Transfer</h5>
-                                            <div class="payment-content">
-                                                <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                                            </div>
-                                            <!-- ACCORDION END -->
-                                            <!-- ACCORDION START -->
-                                            <h5>Cheque Payment</h5>
-                                            <div class="payment-content">
-                                                <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                            </div>
-                                            <!-- ACCORDION END -->
-                                            <!-- ACCORDION START -->
-                                            <h5>PayPal</h5>
-                                            <div class="payment-content">
-                                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                            </div>
-                                            <!-- ACCORDION END -->
-                                        </div>
 
+                                        <img src="{{ asset("qr.jpg") }}" alt="" class="mb-3">
                                         <div class="payment-accordion">
                                             <p>
-                                                <input type="radio" name="payment">
+                                                <input type="radio" value="bank" name="payment">
                                                 Banking
                                             </p>    
                                             <p>
-                                                <input type="radio" name="payment">
+                                                <input type="radio" value="cod" name="payment">
                                                 COD
                                             </p>    
                                         </div>

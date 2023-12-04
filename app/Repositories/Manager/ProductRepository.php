@@ -113,30 +113,18 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
             
             list($prices_from, $prices_to) = explode('-', $request->prices, 2);
         }
-        if ($request->status == "sale") {
-            return DB::table('discount') 
-                ->select("product.*", 'brand.name as brand_name')
-                ->leftjoin("product", "product.id", "=", "discount.product_id") 
-                ->leftjoin('brand', 'product.brand_id', '=', 'brand.id')
-                ->where([
-                            ["discount.percent", "<>", "0"], 
-                            ["discount.status", "<>", "0"]
-                        ]) 
-                ->whereBetween('product.prices', [$prices_from, $prices_to])
-                ->get(); 
-        }else{
-            return DB::table('product') 
-                ->select("product.*", 'brand.name as brand_name') 
-                ->leftjoin('brand', 'product.brand_id', '=', 'brand.id') 
-                ->when($brand_id > 0, function ($query) use ($brand_id) {
-                    return $query->where('product.brand_id', $brand_id);
-                }) 
-                ->when($keyword != "", function ($query) use ($keyword) {
-                    $query->where('product.search_name', "like", "%".$keyword."%");
-                })  
-                ->whereBetween('product.prices', [$prices_from, $prices_to])
-                ->get(); 
-        } 
+
+        return DB::table('product') 
+            ->select("product.*", 'brand.name as brand_name') 
+            ->leftjoin('brand', 'product.brand_id', '=', 'brand.id') 
+            ->when($brand_id > 0, function ($query) use ($brand_id) {
+                return $query->where('product.brand_id', $brand_id);
+            }) 
+            ->when($keyword != "", function ($query) use ($keyword) {
+                $query->where('product.search_name', "like", "%".$keyword."%");
+            })  
+            ->whereBetween('product.prices', [$prices_from, $prices_to])
+            ->get(); 
     }
     public function get_condition($request, $count){
         $brand_id    = $request->tag;
@@ -150,6 +138,7 @@ class ProductRepository extends BaseRepository implements RepositoryInterface
             
             list($prices_from, $prices_to) = explode('-', $request->prices, 2);
         }
+        
         
         
         return DB::table('product') 

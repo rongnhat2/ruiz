@@ -148,6 +148,12 @@ class OrderRepository extends BaseRepository implements RepositoryInterface
     public function get_customer_new(){
         return true;
     }
+    public function get_month(){
+        return DB::table("order_list")
+             ->select('order_list', DB::raw('count(*) as total'))
+             ->groupBy('order_list')
+            ->get();
+    }
     
     
 }

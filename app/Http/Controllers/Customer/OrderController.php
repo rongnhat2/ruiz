@@ -86,7 +86,7 @@ class OrderController extends Controller
             "address"           => $address,
             "note"              => $description,
             "total"             => $total,
-            "payment_value"     => 0,
+            "payment_value"     => $request->data_payment == "bank" ? "2" : "1",
             "payment_status"    => 0,
             "order_value"       => Carbon::now()->toDateTimeString() . "|Order Successful",
             "order_status"      => 0,

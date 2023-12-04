@@ -273,6 +273,10 @@ const Api = {
         url: `/apip/statistic/get-customer`,
         method: 'GET',
     });
+    Api.Statistic.getMonth = () => $.ajax({
+        url: `/apip/statistic/get-month`,
+        method: 'GET',
+    });
 })();
 
 // Image

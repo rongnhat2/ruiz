@@ -35,7 +35,8 @@ const View = {
             var data_name      = $(`${resource}`).find('.data-name').val(); 
             var data_email      = $(`${resource}`).find('.data-email').val(); 
             var data_phone      = $(`${resource}`).find('.data-phone').val(); 
-            var data_address      = $(`${resource}`).find('.data-address').val(); 
+            var data_address      = $(`${resource}`).find('.data-address').val();
+            var data_payment      = $("[name='payment']:checked").val();
             var data_description      = $(`${resource}`).find('.data-description').val(); 
             $(`${resource}`).find('.error-log .js-errors').remove();
 
@@ -56,6 +57,7 @@ const View = {
                 fd.append('data_email', IndexView.Config.toNoTag(data_email));
                 fd.append('data_phone', IndexView.Config.toNoTag(data_phone));
                 fd.append('data_address', IndexView.Config.toNoTag(data_address));
+                fd.append('data_payment', data_payment);
                 fd.append('data_description', IndexView.Config.toNoTag(data_description));
                 fd.append('metadata', localStorage.getItem("ruiz-cart"));
 

@@ -356,7 +356,7 @@ const View = {
     function getProduct(){
         Api.Product.GetAll()
             .done(res => {
-                View.product = res.data.data; 
+                View.product = res.data; 
             })
             .fail(err => { IndexView.helper.showToastError('Error', 'Có lỗi sảy ra'); })
             .always(() => { });
